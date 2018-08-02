@@ -1,0 +1,70 @@
+http://192.168.0.178:8090/display/SD/Source+Code
+
+提交记录规则：
+    Title: xxx（如果对应代码指摘，务必写出指摘的commentID）
+    Unit: xxx
+    Type: xxx
+    detailed description    ← 如果提交很简单，Title已经足以描述清除，可以省略detailed description
+    一份源代码可能有多条指摘，要求一条指摘对应一次commit，并且commit message的Title中一定要将指摘的commentID写出来
+例如：
+    Title: 【UT強化】NS、SS、PS.doc
+    Unit: framework_unified RingBuffer
+    Info:[BaseSystemテスト強化]オブジェクトを複数生成したときの動作確認	
+    1.add test case and modify utd
+
+目录结构以及Makefile规则
+    根据Q&A的结果，大家严格按照下面目录结构以及Makefile规则写代码
+    ***************************************************************************
+    xxx_hal
+    |------ Makefile    // 不能include $(SDKTARGETSYSROOT)/usr/tagl/share/tagl.mk，直接写标准的Makefile
+    |------ README.md
+    |------ hal_api
+    |           |------ xxx_hal.h    // 公开头文件
+    |           |------ ...    // 其他公开头文件。代码如果不是太复杂，最好不要创建子目录，直接放到hal_api即可
+    |------ src
+    |           |------ xxx_hal.cpp
+    |           |------ ...    // 其他源代码。代码如果不是太复杂，最好不要创建子目录，直接放到src即可
+    |------ skeleton    // 存放skeleton源代码，这是必须的（开发手顺中写成了skelton，Q&A已经回答，TMC承认手顺中拼写错误，所以请大家一律使用“skeleton”）
+    |           |------ ...
+    |------ inc    // 如果没有私有头文件，此目录可以不存在
+    |           |------ xxx_hal_yyy.h    // 私有头文件
+    |           |------ ...    // 其他私有头文件。代码如果不是太复杂，最好不要创建子目录，直接放到inc即可
+    |------ sample    // 新规HAL不需要此目录，维护性的HAL暂时先让sample残留着不用管
+    |           |------ ...
+    |------ mock
+    |           |------ Makefile    // 和顶层的Makefile不一样，需要include $(SDKTARGETSYSROOT)/usr/tagl/share/tagl.mk，而不是写标准的Makefile
+    |           |------ include
+    |           |           |------ コンポーネント名    // 使用xxx_hal的unit所属的component名，如果多个unit使用xxx_hal，请选择最主要的那个unit的component名。常见的几个component名：system_service, peripheral_service, vehicle_service，注意：都是带下划线的
+    |           |                       |------ xxx_hal_param.h
+    |           |                       |------ xxx_hal_stub.hpp
+    |           |------ src
+    |                       |------ xxx_hal_stub.cpp
+    |------ test
+    |           |------ unit
+    |           |           |------ driver
+    |           |           |           |------ Makefile    // 和顶层的Makefile不一样，需要include $(SDKTARGETSYSROOT)/usr/tagl/share/tagl.mk，而不是写标准的Makefile
+    |           |           |           |------ ...
+    |           |           |------ testcasename
+    |           |           |           |------ ...
+    |           |           |------ test_design_doc
+    |           |           |           |------ ...
+    |           |           |------ ... // 如果其他目录需要的话可以仿照BaseSystem添加
+    |           |------ mock    // 如果公共的mock不能满足要求，那么此目录就需要
+    |           |           |------ ...
+    |           |------ ...     // 其他需要的目录
+    ***************************************************************************
+test：
+    Phase1, Phase2, Phase3代码的维护原则
+    Phase1: 通过配置环境变量LD_PRELOAD=libxxx_hal_mock.so来运行，务必确保Phase3代码完成之后Phase1测试仍然能通过
+    Phase2：按照skeleton代码要求UT测试都NG之后就可以从src目录拷贝到skeleton目录，Phase3代码完成之后不用保证Phase2的代码还能运行（已经不参与编译）
+    Phase3：最终的UT代码，完成之后还要确保Phase1运行都能通过
+错误处理：
+    代码中的出错处理需要有log输出，推荐使用PASLOG(ZONE_ERR, ...)
+HAL & 本体在x86_64 & aarch64环境下编译手顺
+    x86_64 本体 make test：
+        cd <本体dir>
+        export MACHINE=qemux86-64 # 仅对于IT有意义
+        source /opt/poky/2.1.2/environment-setup-core2-64-poky-linux
+        make test
+        make install-test-local
+        make run-ut-local

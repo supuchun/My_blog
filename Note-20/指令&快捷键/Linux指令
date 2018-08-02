@@ -1,0 +1,57 @@
+                                                linux指令
+1：工作业务
+	ls
+	cd <file>
+	mkdir <dir>
+	rmdir <dir> 
+    rmdir 删除空目录
+    rm <file>
+	cd 
+    gcc -o producer producer.c -lrt -lpthread
+
+    cp：
+        cp <file1> <file2>
+        cp <dir1> <dir2>
+        cp framework_unified/test/unit/test_design_doc/framework_unified_SharedMemHandle_006.xlsx . ：拷贝到当前目录
+
+    通配符： * ，log*或*.txt表示所有这些文件（同一文件夹下）
+        cp *.txt . :拷贝到当前目录
+        cp *.txt ../:拷贝到上一级目录
+        cp framework_unified/test/unit/driver/FrameworkUnifiedSharedMemHandle006_Client.* . ：拷贝到当前目录
+2：其他
+    屏幕常亮设置：
+        xset q
+        xset s 600
+        xset -dpms // xset dpms
+
+    目录结构：
+        / ：根目录
+        ~ ：当前用户主目录
+        . ：当前目录
+        .. ：当前目录的上一个目录
+
+    sudo：
+        sudo apt-get update 更新软件
+        sudo apt-get upgrade 更新系统
+        sudo apt-get install package 安装软件
+        sudo apt-get install -f 自动补全缺少的依赖文件
+        sudo apt-get remove package 删除安装的软件
+        sudo apt-get autoremove package 自动删除安装的软件
+        sudo passwd root 重置密码
+        sudo reboot 关机
+        sudo init 0 重启
+
+    压缩：
+        tar zxvf filename.tar; 
+      //tar zxvf filename.tar.gz;
+         gunzip filename.gz; 
+         gzip -d filename.gz; 
+         unzip filename.zip
+
+    解压：
+        tar zcvf filename.tar dirname;
+      //tar zcvf filename.tar.gz dirname;
+         gzip filename.tar.gz; 
+         gzip filename.tgz
+         zip filename.zip dirname
+         多个文件压缩：tar zcvf filename.tar.gz dirname1 dirname2 dirname3;

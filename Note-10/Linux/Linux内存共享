@@ -1,0 +1,58 @@
+1、文件相关操作：
+    shm_open
+    shm_unlink
+    ftruncate
+    mmap
+    munmap
+    memcpy
+    fsync
+    open
+    write
+    fstat
+    clock_gettime
+
+2、线程相关的函数：
+    pthread_mutexattr_init(&l_tMtxAttr);
+    pthread_mutexattr_setpshared(&l_tMtxAttr, PTHREAD_PROCESS_SHARED);
+    pthread_mutex_init(&l_pShmHdr->m_tBufMutex, &l_tMtxAttr);
+    pthread_mutexattr_destroy(&l_tMtxAttr);
+
+    pthread_condattr_init(&l_tCondAttr);
+    pthread_condattr_setpshared(&l_tCondAttr, PTHREAD_PROCESS_SHARED);
+    pthread_cond_init(&l_pShmHdr->m_tCondVar, &l_tCondAttr);
+    pthread_condattr_destroy(&l_tCondAttr);
+
+    pthread_mutex_lock(&l_pShmHdr->m_tBufMutex);
+    pthread_mutex_unlock(&l_pShmHdr->m_tBufMutex);
+    pthread_cond_signal
+    pthread_cond_wait
+
+3、共享内存  share_mem：shm 共享内存函数
+    共享内存就是允许两个不相关的进程访问同一个逻辑内存。共享内存是在两个正在运行的进程之间共享和传递数据的一种非常有效的方式。不同进程之间共享的内存通常安排为同一段物理内存。
+    进程可以将同一段共享内存连接到它们自己的地址空间中，所有进程都可以访问共享内存中的地址，就好像它们是由用C语言函数malloc分配的内存一样。而如果某个进程向共享内存写入数据，
+    所做的改动将立即影响到可以访问同一段共享内存的任何其他进程。
+4、共享内存并未提供同步机制，也就是说，在第一个进程结束对共享内存的写操作之前，并无自动机制可以阻止第二个进程开始对它进行读取。所以我们通常需要用其他的机制来同步对共享内存的访问，例如前面说到的信号量。
+5、与信号量一样，在Linux中也提供了一组函数接口用于使用共享内存，而且使用共享共存的接口还与信号量的非常相似，而且比使用信号量的接口来得简单。它们声明在头文件 sys/shm.h中。
+    1、shmget函数
+        该函数用来创建共享内存
+        int shmget(key_t key, size_t size, int shmflg); 
+    2、shmat函数
+        第一次创建完共享内存时，它还不能被任何进程访问，shmat函数的作用就是用来启动对该共享内存的访问，并把共享内存连接到当前进程的地址空间。
+        int shmdt(const void *shmaddr); 
+    3、shmdt函数
+        该函数用于将共享内存从当前进程中分离。注意，将共享内存分离并不是删除它，只是使该共享内存对当前进程不再可用。
+        int shmctl(int shm_id, int command, struct shmid_ds *buf); 
+        参数shmaddr是shmat函数返回的地址指针，调用成功时返回0，失败时返回-1.
+    4、shmctl函数
+        与信号量的semctl函数一样，用来控制共享内存
+        int shmctl(int shm_id, int command, struct shmid_ds *buf);
+        shmid_ds结构至少包括以下成员：
+                struct shmid_ds  
+        {  
+            uid_t shm_perm.uid;  
+            uid_t shm_perm.gid;  
+            mode_t shm_perm.mode;  
+        }; 
+6、mmap()及其相关系统调用
+    mmap()系统调用使得进程之间通过映射同一个普通文件实现共享内存。普通文件被映射到进程地址空间后，进程可以向访问普通内存一样对文件进行访问，不必再调用read()，write()等操作。
+    实际上，mmap()系统调用并不是完全为了用于共享内存而设计的。它本身提供了不同于一般对普通文件的访问方式，进程可以像读写内存一样对普通文件的操作。

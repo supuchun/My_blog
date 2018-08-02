@@ -1,0 +1,42 @@
+1:docker环境安装
+	1：安装docker： user@XXXX-xxxx:~$ sudo apt-get install docker.io
+	2：复制docker文件到本地： 从ftp取得最新的docker ，ftp://ftp.security.suntec.net/BaseSystem/14_FromTMC/最新日期/
+	3：导入docker
+		user@XXXX-xxxx:~$ docker load < tagl_dev_ext_23.9.tar
+		user@XXXX-xxxx:~$ docker load < tagl_unittest_23.9.tar
+		4：导入成功，确认： user@XXXX-xxxx:~$ sudo docker images
+	5：创建工作目录： user@XXXX-xxxx:~$ mkdir -p tagl_home/repos
+	6：创建一般用户： user@XXXX-xxxx:~$ sudo usermod -aG docker $USER
+	7：创建之后请重启
+
+2:重启docker（使用脚本创建docker container）
+	1：exit
+	2：使用脚本创建docker container
+	  user@XXXX-xxxx:~$ ./tagldev_run_ext_eb.sh -v 32.9 -n tagl -f
+	  Are you sure to remove existing container?[Y/N]
+	  输入：Y
+		确认成功 (注意以上 脚本执行完毕后会进入docker中，请在本机命令行(docker外)确认 )
+		user@XXXX-xxxx:~$ sudo docker ps -a
+	3:编译命令 
+	  tagldev@33d552e806f6:~$ source /opt/poky/2.1.2/environment-setup-core2-64-poky-linux
+	  tagldev@33d552e806f6:SDKTARGETSYSROOT=/opt/poky/2.1.2/sysroots/core2-64-poky-linux
+	  #./make_test
+	4:执行命令 tagldev@296eef4b0f96:~/zjybasesystem/nsframework$ ./run.sh framework_unified/
+
+3:另外开一个docker终端连接到docker，检查测试的文件路径与内容
+	（sudo） docker exec -it tagl /bin/bash
+	0982a9d7bbe9:~$ ls /tmp/dump.txt 
+	/tmp/dump.txt
+	0982a9d7bbe9:~$ cat /tmp/dump.txt 
+	1230982a9d7bbe9:~$
+
+4:CI会检查utd文档.本地手顺:仓库CI_Script
+	CI_Script/script/unittestcase/ut.py -u addtestcase/nsframework/framework_unified/test/unit/test_design_doc -x 
+	addtestcase/ramework_unified_dispatcher_test_driver_utresult.xml addtestcase/framework_unified_test_driver_utresult.xml
+	xml从CI上下
+	CI_Script/script/unittestcase/ut.py -u ./framework_unified/test/unit/test_design_doc/framework_unified_SharedMemHandle_006.xlsx -x 
+	addtestcase/ramework_unified_ShareMemHandle_test_driver_utresult.xml addtestcase/framework_unified_test_driver_utresult.xml
+
+5:换模块时需要拷贝文件： $SDKTARGETSYSROOT/usr/tagl/include/tagl_types_obsoluted.h
+  cp ./nsframework/tagl_types_obsoluted.h $SDKTARGETSYSROOT/usr/tagl/include/tagl_types_obsoluted.h
+	cp ./tagl_types_obsoluted.h $SDKTARGETSYSROOT/usr/tagl/include/tagl_types_obsoluted.h
