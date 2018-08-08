@@ -1,0 +1,88 @@
+1、Linux 自动休眠功能的关闭方法使用xset命令完成
+    xset q  可以查看当前屏幕保护和电源管理的状态信息
+    xset s  设置屏幕保护时间
+    xset dpms  设置电源管理时间  //通常仅仅设置屏幕保护时间是不行的，因为一旦到了600秒钟，也就是10分钟，屏幕依然会关闭
+    因此一般设置： xset -dpms   就可以了，电源管理功能关闭了，屏幕保护就失效了。
+    屏幕电源管理命令：xset -dpms && xset s off
+    修改用户密码： sudo passwd root 或者 passwd
+
+2、AWK是一种处理文本文件的语言，是一个强大的文本分析工具
+    awk '{print $0}' /etc/passwd
+    echo hhh|awk '{print "hello,world"}'
+    awk '{print "hiya"}' /etc/passwd
+    awk -F":" '{ print $1 }' /etc/passwd
+    awk -F":" '{ print $1 $3 }' /etc/passwd
+    awk -F":" '{ print $1 " " $3 }' /etc/passwd
+    awk -F":" '{ print "username: " $1 "\t\tuid:" $3" }' /etc/passwd
+    awk '{if(NR>=20 && NR<=30) print $1}' test.txt   只查看test.txt文件（100行）内第20到第30行的内容
+    cat test.txt == awk test.txt
+
+3、mv参数设置与运行结果
+    mv 文件名 文件名	将源文件名改为目标文件名
+    mv 文件名 目录名	将文件移动到目标目录
+    mv 目录名 目录名	目标目录已存在，将源目录移动到目标目录；目标目录不存在则改名
+    实例：
+        将文件 aaa 更名为 bbb :
+        mv aaa bbb
+        将info目录放入logs目录中。注意，如果logs目录不存在，则该命令将info改名为logs。
+        mv info/ logs 
+        再如将/usr/student下的所有文件和目录移到当前目录下，命令行为：
+        $ mv /usr/student/*  . 
+
+4、Linux git命令
+    F1 ：执行info指令，查询指令相关信息，会要求您输入欲查询的名称。
+    F2 ：执行cat指令，列出文件内容。
+    F3 ：执行gitview指令，观看文件内容。
+    F4 ：执行vi指令，编辑文件内容。
+    F5 ：执行cp指令，复制文件或目录，会要求您输入目标文件或目录。
+    F6 ：执行mv指令，移动文件或目录，或是更改其名称，会要求您输入目标文件或目录。
+    F7 ：执行mkdir指令，建立目录。
+    F8 ：执行rm指令，删除文件或目录。
+    F9 ：执行make指令，批处理执行指令或编译程序时，会要求您输入相关命令。
+    F10 ：离开git文件管理员。
+
+5、Linux rm命令
+    删除文件可以直接使用rm命令，若删除目录则必须配合选项"-r"，例如：
+        # rm  test.txt 
+        rm：是否删除 一般文件 "test.txt"? y  
+        # rm  homework  
+        rm: 无法删除目录"homework": 是一个目录  
+        # rm  -r  homework  
+        rm：是否删除 目录 "homework"? y 
+    删除当前目录下的所有文件及目录，命令行为：
+        rm  -r  *  
+        linux删除文件夹命令使用方法：
+        rm -rf 目录名字   
+        -r 向下递归，不管有多少级目录，一并删除。
+        -f 直接强行删除，没有任何提示。
+
+6、Linux cp命令
+    使用指令"cp"将当前目录"test/"下的所有文件复制到新目录"newtest"下，输入如下命令：
+    $ cp –r test/ newtest 
+
+7、Linux环境下VI/VIM编辑文件时无权限保存的解决方法：
+    方法一：%! sudo tee % > /dev/null，此命令是把当前文件(即%)作为stdin传给sudo tee命令来执行。
+    方法二: w !sudo tee %
+    方法三：wq！
+
+8、编辑编译运行程序
+    $ cd demo
+    $ vim main.c
+    $ gcc main.c
+    $ ./a.out
+  注意，如果程序没有执行权限，可以使用sudo命令来增加权限，例如：$ sudo chmod 777 a.out
+  分步骤编译：
+    编译（Compile）：gcc -c main.c
+    链接（Link）：gcc main.o
+    运行： ./a.out
+
+9、# 把源文件test.c按照c99标准编译成可执行程序test  
+    gcc -o test test.c -lm -std=c99  或者 gcc -o test.exe test.c -lm 或 gcc -o test test.c -lm
+    root@linux:/mnt/hgfs/C_libary# vi shm_open.c
+    root@linux:/mnt/hgfs/C_libary# gcc -o shm_open shm_open.c
+
+10、控制滚屏，可以按Ctrl+S键，停止滚屏；按Ctrl+Q键可以恢复滚屏。按Ctrl+C（中断）键可以终止该命令的执行，并且返回Shell提示符状态。
+
+11、cat、 tail、bat三者用法相似
+
+12、QT 在ubuntu中启动输入：qtcreator

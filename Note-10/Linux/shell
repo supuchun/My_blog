@@ -1,16 +1,18 @@
 1、shell脚本
-    打开文本编辑器(可以使用vi/vim命令来创建文件)，新建一个文件test.sh，扩展名为sh（sh代表shell）
+    打开文本编辑器(可以使用vi/vim命令来创建文件)，新建一个文件test.sh，扩展名为sh或bash（sh或bash代表shell）
     #!/bin/bash
     echo "Hello World !"
-运行Shell脚本有两种方法：
-    1、作为可执行程序，将上面的代码保存为test.sh，并cd到相应目录：
-       chmod +x ./test.sh  #使脚本具有执行权限
-       ./test.sh  #执行脚本
-    2、作为解释器参数，这种运行方式是，直接运行解释器，其参数就是shell脚本的文件名，如：
-        /bin/sh test.sh 或 sh test.sh
+    运行Shell脚本有两种方法：
+        1、作为可执行程序，将上面的代码保存为test.sh，并cd到相应目录：
+        chmod +x ./test.sh  #使脚本具有执行权限
+        ./test.sh  #执行脚本
+        2、作为解释器参数，这种运行方式是，直接运行解释器，其参数就是shell脚本的文件名，如：
+            /bin/sh test.sh 或 sh test.sh
+
 2、Shell 注释
     以"#"开头的行就是注释，会被解释器忽略。
     sh里没有多行注释，只能每一行加一个#号。
+    
 3、Shell echo命令
     Shell 的 echo 指令与 PHP 的 echo 指令类似，都是用于字符串的输出：echo "It is a test"，这里的双引号完全可以省略
     echo "Hello, Shell" == printf "Hello, Shell\n"， printf需要手动换行
