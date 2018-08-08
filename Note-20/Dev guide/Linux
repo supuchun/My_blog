@@ -1,0 +1,63 @@
+                                                     linux
+1：常用指令
+	ls
+	cd <dir>
+    vim <file> or tourch <file>
+    rm -rf <file>
+	mkdir <dir>
+	rm -rf <dir> 
+    
+    cp <file> <dir>
+        通配符： * ，log*或*.txt表示所有这些文件（同一文件夹下）
+        cp *.txt . :拷贝到当前目录
+        cp *.txt ../:拷贝到上一级目录
+        cp framework_unified/test/unit/driver/FrameworkUnifiedSharedMemHandle006_Client.* . ：拷贝到当前目录
+    gcc -o producer producer.c -lrt -lpthread
+    chmod 777 <filename> // chmod u+x <filename> // chmod +x ./<filename>:权限许可filename
+
+    屏幕常亮设置：
+        xset q
+        xset s 600
+        xset -dpms // xset dpms
+
+    目录结构：
+        ~/ ：根目录
+        ./ ：当前目录
+        ../ ：当前目录的上一个目录
+
+    sudo：
+        sudo apt-get update 更新软件
+        sudo apt-get upgrade 更新系统
+        sudo apt-get install package 安装软件
+        sudo apt-get install -f 自动补全缺少的依赖文件
+        sudo apt-get remove package 删除安装的软件
+        sudo apt-get autoremove package 自动删除安装的软件
+        sudo passwd root 重置密码
+        sudo reboot 关机
+        sudo init 0 重启
+
+    解压：unzip filename.zip // 解压zip
+         unrar e filename.rar // 解压rar
+         tar zxvf filename.tar // 解压tar
+         tar zxvf filename.tar.gz // 解压tar.gz
+
+    压缩：
+        zip filename.zip dirname // 压缩dirname到filename.zip
+        rar e filename.rar dirname // 压缩dirname到filename.rar
+        tar zcvf filename.tar dirname; // 压缩dirname到filename.tar
+        tar zcvf filename.tar.gz dirname; //压缩dirname到filename.tar.gz    
+        多个文件压缩：tar zcvf filename.tar.gz dirname1 dirname2 dirname3; // 压缩dirname1 dirname2 dirname3到filename.tar.gz
+
+2：快捷键
+	Ctrl+K：从光标出剪切文本至本行结束
+	Ctrl+E：光标移动到本行结尾
+	Ctrl+A：光标移动到本行开头
+	Ctrl+W：剪切光标前一个词
+	ALT+F：调到下一个空格
+	ALT+B：回到前一个空格
+	ALT+Backplace：删除前一个词
+	Ctrl+insert：粘贴文本到终端中
+	Ctrl+Shift+T：建一个新标签窗口
+	Ctrl+Shift+N：创建一个新窗口
+	Ctrl+Shift+W：关闭一个最近标签
+	Ctrl+D：关闭当前终端窗口

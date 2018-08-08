@@ -1,0 +1,76 @@
+													Git
+git:提交流程
+	git status  工作区
+	git add <file1> <file2>....   暂存区
+	git commmit -m "xxx"
+		git commit -m " 输入commmit message 
+		git commmit 然后输入commmit message后，输入ctrl+x，Y，回车   本地仓库
+		git commit --amend:修改最后一次提交
+		git commit --amend --no-edit：修改最后一次提交，并不对之前的提交进行编辑
+	git branch：本地分支
+		git branch -a：远程本地所有分支
+		git branch -v:本地分支，版本号，commit massage
+		git branch -vv:本地分支，远程分支，版本号，commit massage
+	git push origin 本地分支:refs/for/远程分支(远程分支没有origin) == （ ctrl+shift+R, push, Tab ）		远程仓库
+        eg：git push origin UT_complementation_20180523:refs/for/iAuto/Release/UT_complementation_20180523
+	gitk:查看本地修改
+	git reset：撤销修改
+		git reset --hard：执行了git add后，执行git reset --hard撤销修该，退回到开始未修改状态
+    禁用：git reset --hard origin/master：执行了git commit后，本地仓库已经被污染，执行git reset --hard origin/master从远程把代码取回来
+		git reset --hard HEAD^：执行了git push后，撤销修该回到git add前开始状态，再执行git push -f强制推到远程仓库
+		git reset --hard HEAD^^：远程merge后有更新导致本地与远程仓库不一致，执行git reset --hard HEAD^^撤销修该回到上上次
+	git pull：拉取快速合并（保证本地是干净的，<=远程仓库）
+	cherry pick: git fetch ssh://liangbo@192.168.0.174:29418/BaseSystem/nsframework refs/changes/20/24120/1 下载到当前cherry pick人的代码	
+----------------------------------------------------------------------------------------------------------------------------------------------------
+git:创建版本库
+	git init：初始化本地版本库
+	git clone url：取远程仓库代码
+git:修改和提交
+	git status：查看状态
+	git diff：查看变更内容
+	git add . :跟踪改动过的文件
+	git add <file>:跟踪指定文件
+	git mv <old> <new>:文件改名
+	git rm <file>:删除文件
+git:修改提交历史
+	git log
+	git log -p <file>:查看指定文件的提交历史
+	git blame <file>:已列表的形式查看指定文件的提交历史
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+git：创建提交分支并切换提交分支
+	git branch；查看分支
+	git branch dev：创建分支； git checkout dev：切换到该分支 == git checkout -b dev： 创建dev分支并切换到该分支
+	git checkout -b develop origin/develop：创建远程对应的本地分支，并切换到与远程对应分支
+		eg： $ git branch -vv ：master分支无代码需要创建切换到指定的17pdevelop_complementation分支
+				* master 9c1b182 [origin/master] Initial empty repository
+			$ git checkout -b 17pdevelop_complementation origin/iAuto/Release/17pdevelop_complementation：创建并切换分支到远程
+			$ git branch -vv
+				* 17pdevelop_complementation 33e2858 [origin/iAuto/Release/17pdevelop_complementation] Merge branch 'develop' into 17pdevelop
+				master                     9c1b182 [origin/master] Initial empty repository
+git：email and name配置
+	git config --list
+	git config --global user.email zhangjunyang@iauto.com
+	git config --global user.name zhangjunyang
+	it config --list
+git：ssh-key配置：
+	$ cd .ssh/
+	$ ssh-keygen -t rsa -C “user zhangjunyang”（三次回车，生成ssh key）
+	$ cat config 
+	$ cat id_rsa.pub：复制粘贴到Gerrit网站上	（Gerrit：Code Review服务器； Jenkins：CI自动编译检查平台）
+			1.提交到Gerrit Code Review时，Gerrit服务器会触发CI自动编译检查平台（Jenkins），检查内容有：make sim,run ut,cppcheck,cpplint,gcov,valgrind
+			2.工程执行结束后，会将检查结果以加减分的形式反馈给Gerrit Code Review
+			在CI Check -1的情况下，GL可根据实际情况判断，如认为提交的代码没有问题，可以手动删除CI的打分结果，手动Verified + 1时，需给出GL详细的判断结果和理由
+			操作方法为 ： 在GerritReview页面删除掉Reviewer taglci，然后手动Verified + 1
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
