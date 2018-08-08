@@ -1,0 +1,34 @@
+1：
+nsframework：
+    NS_FrameworkCore：
+        pas_framework_npservice.cpp                             Y
+
+    NS_NPServiceIf：
+        ns_np_service_api.c
+        ns_np_service_nor_persistence.cpp
+
+    NS_RingBuffer：
+        ns_ringbuffer.cpp                                       Y
+    
+    NS_SharedMemIf：
+        ns_shared_mem_if.cpp                                    Y
+        ns_sharedmem.cpp                                      line 165
+        ns_sharedmem_reader.cpp
+        ns_sharedmem_writer.cpp
+
+    NS_Logger:
+        ns_logger.cpp
+
+2：
+nginx：
+    core:
+        nginx.c                                                   Y                              
+        ngx_buf.c                                                 Y            
+
+3:
+learn-python3:
+        samples:
+                io:
+                with_file.py
+                use_pickle.py
+                use_json.py

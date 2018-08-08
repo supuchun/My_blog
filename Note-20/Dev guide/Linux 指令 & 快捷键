@@ -36,6 +36,11 @@
         sudo reboot 关机
         sudo init 0 重启
 
+    linux下安装sublime Text 3:
+        sudo add-apt-repository ppa:webupd8team/sublime-text-3
+        sudo apt-get update 
+        sudo apt-get install sublime-text-installer
+
     解压：unzip filename.zip // 解压zip
          unrar e filename.rar // 解压rar
          tar zxvf filename.tar // 解压tar
