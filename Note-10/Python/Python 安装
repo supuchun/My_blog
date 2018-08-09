@@ -1,4 +1,11 @@
 1、现在最流行的python集成环境是anaconda ，里面集成了上百个常用的python包，省的安装一大堆python的包了。anaconda里面自带了一个pip。如果你在终端使用的是sudo pip install, 
     那么你安装的python包会安装到系统的python里面，也就是/usr/bin/python2.7里面，如果你使用的是pip install,那么你安装的软件包是安装到anaconda里面的python环境。
     因为我使用的是anaconda，所以使用pip而不是sudo pip
-2、
+2、windows
+        Python直接安装
+        anaconda安装
+   linux
+        自带Python
+        anaconda安装
+        虚拟环境安装
+        Docker安装
