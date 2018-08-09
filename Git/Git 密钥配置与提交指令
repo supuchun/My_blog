@@ -1,0 +1,78 @@
+													Git
+git:密钥配置
+	git：email and name配置
+		git config --list
+		git config --global user.email "zhangjunyang@iauto.com"
+		git config --global user.name "zhangjunyang"
+	git：ssh-key配置
+		创建ssh rsa key配置：
+			$ cd .ssh/
+			$ ssh-keygen -t rsa -C "user zhangjunyang"（三次回车，生成ssh key）
+		添加私钥到ssh agent：		
+			$ ssh-add id_rsa
+		创建config文件：
+		方式一： cat > ~/.ssh/config 
+				user zhangjunyang
+				Ctrl+D 
+		方式二： gedit config or vim config
+				user zhangjunyang
+				Ctrl+S
+		$ cat config
+		连接测试：
+			ssh -P 29418 192.168.0.174
+		$ cat id_rsa.pub：复制粘贴到Gerrit网站上，Gerrit：Code Review服务器，Jenkins：CI自动编译检查平台
+				1.提交到Gerrit Code Review时，Gerrit服务器会触发CI Jenkins自动编译检查平台，检查内容有：make sim,run ut,cppcheck,cpplint,gcov,valgrind
+				2.工程执行结束后，会将检查结果以加减分的形式反馈给Gerrit Code Review
+				在CI Check -1的情况下，GL可根据实际情况判断，如认为提交的代码没有问题，可以手动删除CI的打分结果，手动Verified + 1时，需给出GL详细的判断结果和理由
+				操作方法为 ： 在GerritReview页面删除掉Reviewer taglci，然后手动Verified + 1
+		git push代码提交时出现没有change-id的解决办法
+				cd  仓库目录/.git/hooks/
+				curl http:192.168.0.110/share/commit-msg > commit-msg
+				chmod +x commit-msg
+			clone代码时请使用ssh协议，不要使用HTTP协议
+			使用他人机器出现提交者与本人不匹配时：
+				rm -rf ~/.git
+				按上面的手顺重新配置git
+				重新clonecangku
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+git:提交指令
+	git status  工作区
+	git add <file> :跟踪指定文件   暂存区
+	git add . :跟踪改动过的文件
+	git commmit -m "xxx"
+		git commit -m " 输入commmit message，输入"
+		git commmit 然后输入commmit message后，输入ctrl+x，Y，回车   本地仓库
+		git commit --amend:修改最后一次提交
+		git commit --amend --no-edit：修改最后一次提交，并不对之前的提交进行编辑
+	git branch：本地分支
+		git branch -a：远程本地所有分支
+		git branch -v:本地分支，版本号，commit massage
+		git branch -vv:本地分支，远程分支，版本号，commit massage
+	git push origin 本地分支:refs/for/远程分支(远程分支没有origin) == （ ctrl+shift+R, push, Tab ）		远程仓库
+        eg：git push origin UT_complementation_20180523:refs/for/iAuto/Release/UT_complementation_20180523
+	gitk:查看本地修改
+	git reset：撤销修改
+		git reset --hard：执行了git add后，执行git reset --hard撤销修该，退回到开始未修改状态
+    禁用：git reset --hard origin/master：执行了git commit后，本地仓库已经被污染，执行git reset --hard origin/master从远程把代码取回来
+		git reset --hard HEAD^：执行了git push后，撤销修该回到git add前开始状态，再执行git push -f强制推到远程仓库
+		git reset --hard HEAD^^：远程merge后有更新导致本地与远程仓库不一致，执行git reset --hard HEAD^^撤销修该回到上上次
+	git pull：拉取快速合并（保证本地是干净的，<=远程仓库）
+	cherry pick: git fetch ssh://liangbo@192.168.0.174:29418/BaseSystem/nsframework refs/changes/20/24120/1 下载到当前cherry pick人的代码
+	git checkout -b develop origin/develop：创建分支并切换到该分支
+		git branch dev：创建分支； git checkout dev：切换到该分支 == git checkout -b dev： 创建dev分支并切换到该分支
+		git checkout -b develop origin/develop：创建远程对应的本地分支，并切换到与远程对应分支
+			eg： $ git branch -vv ：master分支无代码需要创建切换到指定的17pdevelop_complementation分支
+				$ git checkout -b 17pdevelop_complementation origin/iAuto/Release/17pdevelop_complementation：创建并切换分支到远程	
+--------------------------------------------------------------------------------------------------------------------------------------------			
+
+
+
+
+
+
+
+
+
+
+
+
