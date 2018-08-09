@@ -1,0 +1,60 @@
+1：安装Tensorflow分为Windows和Linux两种版本
+    安装Tensorflow Windows版本
+        1:从官方网站下载Anaconda安装，添加到路径
+        2：安装完成Anaconda之后进行环境变量的测试
+            进入到windows中的命令模式：
+            （1）检测anaconda环境是否安装成功：conda --version
+            （2）检测目前安装了哪些环境变量：conda info --envs
+            （3）查看当前使用的python版本：输入python
+                 conda create --name tensorflow python=3.X
+            （4）激活tensflow的环境：activate tensorflow
+            （5）检测tensflow的环境添加到了Anaconda里面：conda info --envs
+            （6）检测当前环境中的python的版本：python --version
+            （7）退出tensorflow的环境：deactivate
+            （8）切换到tensorflow的环境：activate tensorflow      
+        3：通过命令：pip install --upgrade --ignore-installed tensorflow
+        4：等待完成之后，确认是否安装成功
+            （1）activate tensorflow
+            （2）输入python
+            （3）编写一个使用的代码    
+                    import tensorflow as tf
+                    hello = tf.constant('first tensorflow')
+                    sess = tf.Session()
+                    print (sess.run(hello))
+
+    安装Tensorflow Linux版本
+        1:从官方网站下载Anaconda的Linux版本
+        2：运行下载好的Anaconda,执行命令：bash XXXXXXXXX（就是Anaconda文件的名字）
+        3：安装完之后，对Anaconda 的环境进行测试；执行命令：conda --version
+        4：执行命令：conda create -n tensorflow python=3.X，根据提示，进行输入yes就可以了，慢慢等待。 
+        5：激活环境，执行命令：source activate tensorflow 
+        6：pip install --ignore-installed --upgrade tensorflow
+          （或者https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp35-cp35m-linux_x86_64.whl   
+        7：等待完成之后，确认是否安装成功
+            （1）activate tensorflow
+            （2）输入python
+            （3）编写一个使用的代码    
+                    import tensorflow as tf
+                    hello = tf.constant('first tensorflow')
+                    sess = tf.Session()
+                    print (sess.run(hello))
+        8：打开新的终端使用conda命令安装anaconda-navigator：
+            conda install anaconda-navigator
+            anaconda-navigator
+
+    Ubuntu16.04下Anaconda安装完成后conda:找不到命令
+        解决方案如下：
+        方式一：
+            执行命令 echo 'export PATH="/home/anaconda3/bin:$PATH"' >> ~/.bashrc
+            执行命令 source ~/.bashrc
+        方式二：
+            执行命令 export PATH=/home/anaconda3/bin:$PATH
+            执行命令 source ~/.bashrc
+        方式三：
+            修改环境变量，执行命令 vim ~/.bashrc
+            在最后添加：export PATH=~/anaconda3/bin:$PATH
+            重启环境变量：source ~/.bashrc
+
+2：pycharm：按教程选择路径安装即可，创建工程导入anaconda下tensorflow的python.exe即可
+
+
