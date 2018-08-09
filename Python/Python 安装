@@ -2,7 +2,7 @@
     那么你安装的python包会安装到系统的python里面，也就是/usr/bin/python2.7里面，如果你使用的是pip install,那么你安装的软件包是安装到anaconda里面的python环境。
     因为我使用的是anaconda，所以使用pip而不是sudo pip
 2、windows
-        Python直接安装
+        Python.exe直接安装
         anaconda安装
    linux
         自带Python

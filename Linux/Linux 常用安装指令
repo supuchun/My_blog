@@ -1,0 +1,28 @@
+1：sudo：
+    sudo apt-get update 更新软件
+    sudo apt-get upgrade 更新系统
+    sudo apt-get install package 安装软件
+    sudo apt-get install -f 自动补全缺少的依赖文件
+    sudo apt-get remove package 删除安装的软件
+    sudo apt-get autoremove package 自动删除安装的软件
+    sudo passwd root 重置密码
+    sudo reboot 关机
+    sudo init 0 重启
+
+2：linux下安装sublime Text 3:
+        方式一：下载安装包安装
+            sudo dpkg -i sublime-text——build-3126——amd64.deb
+        方式二：指令安装
+            sudo add-apt-repository ppa:webupd8team/sublime-text-3
+            sudo apt-get update 
+            sudo apt-get install sublime-text-installer
+
+3：输入法安装
+    1：pinyin输入法
+        sudo apt-get install ibus
+        sudo apt-get install ibus-sunpinyin ibus-libpinyin ibus-anthy ibus-mozc
+        logout   -> login一下
+        system setting  ->text entry  -> 点击 + 添加输入法  ->ibus  -> 选择 chinese
+        logout   -> login一下就可以使用了
+    2：安装搜狗输入法
+

@@ -1,0 +1,55 @@
+1：常用指令
+	ls
+	cd <dir>
+    vim <file> or tourch <file>
+    rm -rf <file>
+	mkdir <dir>
+	rm -rf <dir> 
+    cp <file> <dir>
+    通配符： * ，log*或*.txt表示所有这些文件（同一文件夹下）
+        cp *.txt . :拷贝到当前目录
+        cp *.txt ../:拷贝到上一级目录
+        cp framework_unified/test/unit/driver/FrameworkUnifiedSharedMemHandle006_Client.* . ：拷贝到当前目录
+ 
+2：目录结构：
+    ~/ ：根目录
+    ./ ：当前目录
+    ../ ：当前目录的上一个目录
+
+3：解压压缩
+    解压：
+        unzip filename.zip // 解压zip
+        unrar e filename.rar // 解压rar
+        tar zxvf filename.tar // 解压tar
+        tar zxvf filename.tar.gz // 解压tar.gz
+    压缩：
+        zip filename.zip dirname // 压缩dirname到filename.zip
+        rar e filename.rar dirname // 压缩dirname到filename.rar
+        tar zcvf filename.tar dirname; // 压缩dirname到filename.tar
+        tar zcvf filename.tar.gz dirname; //压缩dirname到filename.tar.gz    
+        多个文件压缩：tar zcvf filename.tar.gz dirname1 dirname2 dirname3; // 压缩dirname1 dirname2 dirname3到filename.tar.gz
+4：
+    chmod 777 <filename> // chmod u+x <filename> // chmod +x ./<filename>:权限许可执行
+    gcc -o producer producer.c -lrt -lpthread：编译运行创建的线程程序
+    QT启动：在ubuntu中启动输入：qtcreator
+
+5：屏幕常亮设置：
+    xset q
+    xset s 600
+    xset -dpms // xset dpms
+
+6：Linux环境下VI/VIM编辑文件时无权限保存的解决方法：
+    方法一：%! sudo tee % > /dev/null，此命令是把当前文件(即%)作为stdin传给sudo tee命令来执行。
+    方法二: w !sudo tee %
+    方法三：wq！
+
+7：编辑编译运行程序
+    $ cd demo
+    $ vim main.c
+    $ gcc main.c
+    $ ./a.out
+  注意，如果程序没有执行权限，可以使用sudo命令来增加权限，例如：$ sudo chmod 777 a.out
+  分步骤编译：
+    编译（Compile）：gcc -c main.c
+    链接（Link）：gcc main.o
+    运行： ./a.out

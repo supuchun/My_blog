@@ -1,0 +1,13 @@
+Linux 快捷键：
+	Ctrl+K：从光标出剪切文本至本行结束
+	Ctrl+E：光标移动到本行结尾
+	Ctrl+A：光标移动到本行开头
+	Ctrl+W：剪切光标前一个词
+	ALT+F：调到下一个空格
+	ALT+B：回到前一个空格
+	ALT+Backplace：删除前一个词
+	Ctrl+insert：粘贴文本到终端中
+	Ctrl+Shift+T：建一个新标签窗口
+	Ctrl+Shift+N：创建一个新窗口
+	Ctrl+Shift+W：关闭一个最近标签
+	Ctrl+D：关闭当前终端窗口
