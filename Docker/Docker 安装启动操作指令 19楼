@@ -47,11 +47,3 @@
 	eg： CI_Script/script/unittestcase/ut.py -u ./framework_unified/test/unit/test_design_doc/framework_unified_SharedMemHandle_006.xlsx -x 
 	addtestcase/framework_unified_ShareMemHandle_test_driver_utresult.xml addtestcase/framework_unified_test_driver_utresult.xml
 
-6：Docker组成
-	Docker镜像，查找和浏览所有容器镜像
-	Docker服务器端守护进程，管理所有容器
-	Docker客户端命令行，控制服务器守护进程
-	容器和镜像的唯一区别在于容器的最上层是可读写的，容器=镜像（只读层）+读写层
-7：Docker与VM对比
-	Server->Host OS-> Hypervisor->Guest OS->Bins/Libs->App
-	Server->Host OS-> Docker Engine->Bins/Libs->App

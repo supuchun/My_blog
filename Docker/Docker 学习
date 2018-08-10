@@ -1,0 +1,17 @@
+1：Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，
+	相互之间不会有任何接口一个完整的Docker有以下几个部分组成：
+		1.docker Client客户端,客户端命令行，控制服务器守护进程
+		2.Docker Daemon守护进程，服务器端守护进程，管理所有容器
+		3.Docker Image镜像,查找和浏览所有容器镜像
+		4.DockerContainer容器,容器和镜像的唯一区别在于容器的最上层是可读写的，容器=镜像（只读层）+读写层
+2：Docker架构：Docker 使用客户端-服务器 (C/S) 架构模式，使用远程API来管理和创建Docker容器。Docker 容器通过Docker 镜像来创建。容器与镜像的关系类似于面向对象编程中的对象与类。
+		Docker	面向对象
+		镜像	类
+		容器	对象
+3：Docker与VM对比
+	App
+	Bins/Libs			App
+	Guest OS			Bins/Libs
+	Hypervisor			Docker Engine
+	Host OS				Host OS
+	Server				Server

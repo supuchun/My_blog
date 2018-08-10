@@ -1,4 +1,5 @@
 1：常用指令
+    uname -r:查看内核
 	ls
 	cd <dir>
     vim <file> or tourch <file>
