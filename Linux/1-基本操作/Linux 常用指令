@@ -66,3 +66,17 @@
     sudo rm -rf .git/
     rm -f .git
     rm -rf .git（有效）
+
+10：Ubuntu中Could not get lock /var/lib/dpkg/lock解决方案
+    1、找到并且杀掉所有的apt-get 和apt进程：
+        ps -A | grep apt
+        $ sudo kill -9 processnumber 或者 $ sudo kill -SIGKILL processnumber
+    2、删除锁定文件
+        方法一：
+            第一步：删除 /var/lib/apt/lists/ 以及缓存文件夹下的锁定文件：
+                $ sudo rm /var/lib/apt/lists/lock
+                $ sudo rm /var/cache/apt/archives/lock
+            第二步:更新你的软件包源列表：$ sudo apt update 或者 $ sudo apt-get update
+        方法二：
+            第一步：移除 /var/lib/dpkg/ 文件夹下的锁定文件：$ sudo rm /var/lib/dpkg/lock
+            第二步:强制重新配置软件包：$ $ sudo dpkg --configure -a
