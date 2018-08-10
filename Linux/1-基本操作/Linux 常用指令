@@ -1,5 +1,6 @@
 1：常用指令
     uname -r:查看内核
+    修改用户密码： sudo passwd root 或者 passwd
 	ls
 	cd <dir>
     vim <file> or tourch <file>
@@ -54,3 +55,14 @@
     编译（Compile）：gcc -c main.c
     链接（Link）：gcc main.o
     运行： ./a.out
+
+8：解决linux虚拟机与windows之间互相复制粘贴文件
+    1、首先点击虚拟机中的VMwaretools，然后我们的虚拟机左侧会出现一个VMwaretools的栏目
+    2、然后，我们在终端里进行解压出现的这个.gz压缩包。tar zxf VMwareTools-8.4.6-385536.tar.gz
+    3、cd vmware-tools-distrib，在执行这一句时，有可能会提升没有权限，因此需要采用sudo进行执行。
+    4、./vmware-install.p接下来enter/yes，即可完成安装，最后一步重新启动一下Ubuntu，即可实现了文件的互相拷贝
+
+9：撤销git init过的文件
+    sudo rm -rf .git/
+    rm -f .git
+    rm -rf .git（有效）

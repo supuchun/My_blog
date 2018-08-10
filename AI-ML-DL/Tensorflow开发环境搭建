@@ -1,4 +1,4 @@
-1：安装Tensorflow分为Windows和Linux两种版本
+1：Anaconda安装Tensorflow分为Windows和Linux两种版本
     安装Tensorflow Windows版本
         1:从官方网站下载Anaconda安装，添加到路径
         2：安装完成Anaconda之后进行环境变量的测试
@@ -55,6 +55,16 @@
             在最后添加：export PATH=~/anaconda3/bin:$PATH
             重启环境变量：source ~/.bashrc
 
-2：pycharm：按教程选择路径安装即可，创建工程导入anaconda下tensorflow的python.exe即可
+    pycharm：按教程选择路径安装即可，创建工程导入anaconda下tensorflow的python.exe即可
+    
+2：pip安装Tensorflow的Windows和Linux两种版本
+    pip 安装Tensorflow Windows版本
+        1:从官方网站下载Python安装，添加到路径
+        2：安装完成Python之后安装pip及环境
+
+
+    pip 安装Tensorflow Linux版本
+        1:从官方网站下载Python安装，添加到路径
+        2：安装完成Python之后终端安装pip及环境
 
 

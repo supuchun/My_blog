@@ -35,19 +35,20 @@ git:密钥配置
 				重新clonecangku
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 git:提交指令
-	git status  工作区
-	git add <file> :跟踪指定文件   暂存区
+	git status：工作区，就是你在电脑里能看到的目录
+	git add <file> :暂存区跟踪指定文件，英文叫stage, 或index。一般存放在"git目录"下的index文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）
 	git add . :跟踪改动过的文件
-	git commmit -m "xxx"
+	git commmit -m "xxx"：工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
 		git commit -m " 输入commmit message，输入"
-		git commmit 然后输入commmit message后，输入ctrl+x，Y，回车   本地仓库
+		git commmit 然后输入commmit message后，输入ctrl+x，Y，回车 
 		git commit --amend:修改最后一次提交
 		git commit --amend --no-edit：修改最后一次提交，并不对之前的提交进行编辑
 	git branch：本地分支
+		git remote // git remote -v：查看当前的远程库
 		git branch -a：远程本地所有分支
 		git branch -v:本地分支，版本号，commit massage
 		git branch -vv:本地分支，远程分支，版本号，commit massage
-	git push origin 本地分支:refs/for/远程分支(远程分支没有origin) == （ ctrl+shift+R, push, Tab ）		远程仓库
+	git push <远程主机名> <本地分支名>:refs/for/<远程分支名> == （ ctrl+shift+R, push, Tab ）	远程仓库
         eg：git push origin UT_complementation_20180523:refs/for/iAuto/Release/UT_complementation_20180523
 	gitk:查看本地修改
 	git reset：撤销修改
