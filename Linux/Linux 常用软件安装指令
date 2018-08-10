@@ -21,8 +21,9 @@
     1：pinyin输入法
         sudo apt-get install ibus
         sudo apt-get install ibus-sunpinyin ibus-libpinyin ibus-anthy ibus-mozc
-        logout   -> login一下
+        logout -> login一下
         system setting  ->text entry  -> 点击 + 添加输入法  ->ibus  -> 选择 chinese
-        logout   -> login一下就可以使用了
+        logout -> login一下就可以使用了
     2：安装搜狗输入法
+        方式一：
 
