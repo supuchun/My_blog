@@ -31,7 +31,7 @@
         6：pip install --ignore-installed --upgrade tensorflow
           （或者https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.12.1-cp35-cp35m-linux_x86_64.whl   
         7：等待完成之后，确认是否安装成功
-            （1）activate tensorflow
+            （1）source activate tensorflow
             （2）输入python
             （3）编写一个使用的代码    
                     import tensorflow as tf
@@ -55,7 +55,8 @@
             在最后添加：export PATH=~/anaconda3/bin:$PATH
             重启环境变量：source ~/.bashrc
 
-    pycharm：按教程选择路径安装即可，创建工程导入anaconda下tensorflow的python.exe即可
+    pycharm：按教程选择路径安装即可，创建工程导入anaconda下tensorflow的python.exe即可。
+    注意：在Linux中运行Pycharm不是直接点击就运行，而是需要找到对应的目录下（bin目录），然后执行命令：sh pycharm.sh 即可运行Pycharm
     
 2：pip安装Tensorflow的Windows和Linux两种版本
     pip 安装Tensorflow Windows版本

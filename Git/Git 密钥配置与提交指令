@@ -1,7 +1,7 @@
 git:密钥配置
 	git：email and name配置
 		git config --list
-		git config --global user.email "zhangjunyang@iauto.com"
+		git config --global user.email "949625150@qq.com"
 		git config --global user.name "zhangjunyang"
 	git：ssh-key配置
 		创建ssh rsa key配置：
