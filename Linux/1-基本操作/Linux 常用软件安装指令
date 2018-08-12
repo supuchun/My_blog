@@ -26,6 +26,18 @@
         logout -> login一下就可以使用了
     2：安装搜狗输入法
         方式一：
+            1：下载Linux版本的搜狗输入法安装包：xxx.deb
+            2：sudo dpkg -i xxx.deb
+            3：sudo apt-get install -f
+            4：设置->语言支持->键盘输入方式 选择“fcitx”，重启电脑即可
+        方式一：
+            1：下载Linux版本的搜狗输入法安装包：xxx.deb
+            2：
+            3：
+            4：
+
+
+
 
 
 

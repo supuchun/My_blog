@@ -62,10 +62,10 @@
     pip 安装Tensorflow Windows版本
         1:从官方网站下载Python安装，添加到路径
         2：安装完成Python之后安装pip及环境
-
-
+        3:pip3 install --upgrade tensorflow
     pip 安装Tensorflow Linux版本
         1:从官方网站下载Python安装，添加到路径
         2：安装完成Python之后终端安装pip及环境
+        3:pip3 install --upgrade tensorflow
 
 
