@@ -26,15 +26,29 @@
         logout -> login一下就可以使用了
     2：安装搜狗输入法
         方式一：
-            1：下载Linux版本的搜狗输入法安装包：xxx.deb
-            2：sudo dpkg -i xxx.deb
+            1：下载Linux版本的搜狗输入法安装包：sougou_64.deb
+            2：sudo dpkg -i sougou_64.deb
             3：sudo apt-get install -f
             4：设置->语言支持->键盘输入方式 选择“fcitx”，重启电脑即可
-        方式一：
-            1：下载Linux版本的搜狗输入法安装包：xxx.deb
-            2：
-            3：
-            4：
+        方式二：
+            1：sudo apt-get install fcitx
+            2：sudo apt-get install libssh2-1
+            3：下载Linux版本的搜狗输入法安装包：sougou_64.deb 
+                或 wget "http://pinyin.sogou.com/linux/download.php?f=linux&bit=64" -O "sougou_64.deb"
+            4：sudo dpkg -i sougou_64.deb
+            5：sudo apt-get install -f
+            6：设置->语言支持->键盘输入方式 选择“fcitx”，重启电脑即可
+        方式三：
+            1：sudo add-apt-repository ppa:fcitx-team/nightly
+            2：sudo apt-get update
+            3：sudo apt-get install fcitx
+            4：sudo apt-get install fcitx-config-gtk
+            5：sudo apt-get install fcitx-table-all
+            6：sudo apt-get install im-switch
+            7：下载Linux版本的搜狗输入法安装包：sougou_64.deb
+            8：sudo dpkg -i sougou_64.deb
+            9：sudo apt-get install -f
+            10：设置->语言支持->键盘输入方式 选择“fcitx”，重启电脑即可
 
 
 
