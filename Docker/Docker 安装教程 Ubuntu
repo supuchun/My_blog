@@ -1,2 +1,68 @@
-1:
-	
+Docker安装教程
+方式一：
+    1、命令安装：
+        更新源：sudo apt-get update
+        安装：sudo apt-get install -y docker.io
+    2、查看状态：sudo status docker
+    3、启动docker后台服务：sudo service docker start
+        开启Docker:systemctl start docker 或 /etc/init.d/docker start
+        关闭 docker： sudo stop docker
+        开启 docker：sudo start docker
+        docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
+    4、查看版本：sudo docker version
+       附加：更换阿里镜像加速源:见 1-Docker安装与简单使用
+       附加：权限方面, docker 的功能限制于 root 用户, docker 用户组. 所以, 你要么带着 sudo 用, 要么把当前用户加入到 docker 组:
+            $ sudo groupadd docker
+            $ sudo gpasswd -a zjy docker // $ sudo usermod -a -G docker zjy
+    5、下载一个镜像:docker pull ubuntu:14.04
+    6、docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
+    7、安装好之后就可以进入容器了: docker run -t -i ubunto /bin/bash
+
+方式二：
+    1、检查内核版本 
+        uname -r
+        查看系统版本：lsb_release -a 
+        为了安装docker，需要以下ubuntu版本之一的64位系统：
+            Yakkety 16.10
+            Xenial 16.04 (LTS)
+            Trusty 14.04 (LTS)) 
+    2、更新APT源
+        sudo apt-get update
+        sudo apt-getinstall apt-transport-https ca-certificates
+
+    3、添加docker仓库的GPG密钥
+        sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+    4、运行一下命令，添加docker的APT入口
+        echo "deb https://apt.dockerproject.org/repo ubuntu-precise main" | sudo tee /etc/apt/sources.list.d/docker.list    12.04 (LTS)
+        echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list     14.04 (LTS)
+        echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list     16.04 (LTS)
+        或者 编辑 vim /etc/apt/sources.list.d/docker.list 文件，
+        添加 deb https://apt.dockerproject.org/repo ubuntu-precise main     12.04 (LTS)
+            deb https://apt.dockerproject.org/repo ubuntu-trusty main      14.04 (LTS)
+            deb https://apt.dockerproject.org/repo ubuntu-xenial main      16.04 (LTS)
+            
+    5、下更新源列表并安装
+        sudo apt-get update
+        sudo apt-get install docker-engine
+    6、查看状态：sudo status docker
+    7、启动docker后台服务：sudo service docker start
+        开启Docker:systemctl start docker 或 /etc/init.d/docker start
+        关闭 docker： sudo stop docker
+        开启 docker：sudo start docker
+        docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
+    8、查看版本：sudo docker version
+    查看docker版本：docker info
+        附加：更换阿里镜像加速源:见 1-Docker安装与简单使用
+        附加：权限方面, docker 的功能限制于 root 用户, docker 用户组. 所以, 你要么带着 sudo 用, 要么把当前用户加入到 docker 组:
+            $ sudo groupadd docker
+            $ sudo gpasswd -a zjy docker // $ sudo usermod -a -G docker zjy
+    9、下载一个镜像:docker pull ubuntu:14.04
+    10、docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
+    11、安装好之后就可以进入容器了: docker run -t -i ubunto /bin/bash
+
+方式三：
+
+
+
+        
