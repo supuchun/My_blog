@@ -61,8 +61,5 @@ Docker安装教程
     10、docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
     11、安装好之后就可以进入容器了: docker run -t -i ubunto /bin/bash
 
-方式三：
-
-
 
         

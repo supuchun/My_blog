@@ -19,7 +19,8 @@ git:密钥配置
 		$ cat config
 		连接测试：
 			ssh -P 29418 192.168.0.174
-		$ cat id_rsa.pub：复制粘贴到Gerrit网站上，Gerrit：Code Review服务器，Jenkins：CI自动编译检查平台
+		$ cat id_rsa.pub：复制粘贴到Gerrit网站上，验证是否成功，输入以下命令：$ ssh -T git@github.com
+		Gerrit：Code Review服务器，Jenkins：CI自动编译检查平台
 				1.提交到Gerrit Code Review时，Gerrit服务器会触发CI Jenkins自动编译检查平台，检查内容有：make sim,run ut,cppcheck,cpplint,gcov,valgrind
 				2.工程执行结束后，会将检查结果以加减分的形式反馈给Gerrit Code Review
 				在CI Check -1的情况下，GL可根据实际情况判断，如认为提交的代码没有问题，可以手动删除CI的打分结果，手动Verified + 1时，需给出GL详细的判断结果和理由
@@ -28,8 +29,7 @@ git:密钥配置
 				cd  仓库目录/.git/hooks/
 				curl http:192.168.0.110/share/commit-msg > commit-msg
 				chmod +x commit-msg
-			clone代码时请使用ssh协议，不要使用HTTP协议
-			使用他人机器出现提交者与本人不匹配时：
+		clone代码时请使用ssh协议，不要使用HTTP协议，使用他人机器出现提交者与本人不匹配时：
 				rm -rf ~/.git
 				按上面的手顺重新配置git
 				重新clonecangku
