@@ -16,7 +16,7 @@ Docker安装教程
             $ sudo gpasswd -a zjy docker // $ sudo usermod -a -G docker zjy
     5、下载一个镜像:docker pull ubuntu:14.04
     6、docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
-    7、安装好之后就可以进入容器了: docker run -t -i ubunto /bin/bash
+    7、安装好之后就可以进入容器了: docker run -t -i ubunto /bin/bash // zjy@ubuntu:~$  docker run -it bash
 
 方式二：
     1、检查内核版本 
@@ -59,7 +59,27 @@ Docker安装教程
             $ sudo gpasswd -a zjy docker // $ sudo usermod -a -G docker zjy
     9、下载一个镜像:docker pull ubuntu:14.04
     10、docker run ubuntu:14.04 echo "Hello World" //  sudo docker run hello-world //  docker run hello-world
-    11、安装好之后就可以进入容器了: docker run -t -i ubunto /bin/bash
+    11、安装好之后就可以进入容器了: docker run -t -i ubuntu /bin/bash // zjy@ubuntu:~$  docker run -it bash
+==================================================================================================================================================================
+ubuntu：镜像准备好后，就开始创建docker容器：
+    1、ubuntu：镜像准备好后，就开始创建docker容器，用于搭建greenplum的节点
+            sudo docker run --name gpubuntu1 -it ubuntu /bin/bash
+            sudo docker run --name gpubuntu2 -it ubuntu /bin/bash
+            sudo docker run --name gpubuntu3 -it ubuntu /bin/bash
+            sudo docker run --name gpubuntu4 -it ubuntu /bin/bash
+            docker run --name gpubuntu1 -it ubuntu bash
+            docker run --name gpubuntu2 -it ubuntu bash
+            docker run --name gpubuntu3 -it ubuntu bash
+            docker run --name gpubuntu4 -it ubuntu bash
 
-
-        
+    2、ubuntu：镜像准备好后，就开始创建docker容器，用于搭建hadoop的节点
+            # 创建4个节点，用于搭建hadoop
+            docker run -it --name hadoopcentos1 centos:6 /bin/bash
+            docker run -it --name hadoopcentos2 centos:6 /bin/bash
+            docker run -it --name hadoopcentos3 centos:6 /bin/bash
+            docker run -it --name hadoopcentos4 centos:6 /bin/bas
+            # 启动容器
+            docker start hadoopcentos1
+            docker start hadoopcentos2
+            docker start hadoopcentos3
+            docker start hadoopcentos4

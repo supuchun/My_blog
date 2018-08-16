@@ -58,7 +58,7 @@
     pycharm：按教程选择路径安装即可，创建工程导入anaconda下tensorflow的python.exe即可。
     注意：在Linux中运行Pycharm不是直接点击就运行，而是需要找到对应的目录下（bin目录），然后执行命令：sh pycharm.sh 即可运行Pycharm
     
-2：pip安装Tensorflow的Windows和Linux两种版本
+2：pip原生安装Tensorflow的Windows和Linux两种版本
     pip 安装Tensorflow Windows版本
         1:从官方网站下载Python安装，添加到路径
         2：安装完成Python之后安装pip及环境
@@ -68,4 +68,35 @@
         2：安装完成Python之后终端安装pip及环境
         3:pip3 install --upgrade tensorflow
 
+3:Virtualenv安装Tensorflow的Linux两种版本
+    发出下列其中一条命令来安装 pip 和 Virtualenv：
+        sudo apt-get install python-pip python-dev python-virtualenv # for Python 2.7
+        sudo apt-get install python3-pip python3-dev python-virtualenv # for Python 3.n
+    发出下列其中一条命令来创建 Virtualenv 环境：
+        virtualenv --system-site-packages targetDirectory # for Python 2.7
+        virtualenv --system-site-packages -p python3 targetDirectory # for Python 3.n
+        targetDirectory 用于指定 Virtualenv 树的顶层目录。指令假定 targetDirectory 为 ~/tensorflow，但可以选择任何目录。
+    发出下列其中一条命令激活 Virtualenv 环境：
+        source ~/tensorflow/bin/activate # bash, sh, ksh, or zsh
+        source ~/tensorflow/bin/activate.csh  # csh or tcsh
+        . ~/tensorflow/bin/activate.fish  # fish
+    确保安装了 pip 8.1 或更高版本：
+        (tensorflow)$ easy_install -U pip
+    发出下列其中一条命令以在活动 Virtualenv 环境中安装 TensorFlow：
+        (tensorflow)$ pip install --upgrade tensorflow      # for Python 2.7
+        (tensorflow)$ pip3 install --upgrade tensorflow     # for Python 3.n
+        (tensorflow)$ pip install --upgrade tensorflow-gpu  # for Python 2.7 and GPU
+        (tensorflow)$ pip3 install --upgrade tensorflow-gpu # for Python 3.n and GPU
+    如果上述命令执行失败，请执行 
+        (tensorflow)$ pip install --upgrade tfBinaryURL   # Python 2.7
+        (tensorflow)$ pip3 install --upgrade tfBinaryURL  # Python 3.n 
+        tfBinaryURL 表示 TensorFlow Python 软件包的网址：Python 3.5、Python 3.6
+            仅支持 CPU：
+            https://download.tensorflow.google.cn/linux/cpu/tensorflow-1.8.0-cp35-cp35m-linux_x86_64.whl
+            https://download.tensorflow.google.cn/linux/cpu/tensorflow-1.8.0-cp36-cp36m-linux_x86_64.whl
+            支持 GPU：
+            https://download.tensorflow.google.cn/linux/gpu/tensorflow_gpu-1.8.0-cp35-cp35m-linux_x86_64.whl
+            https://download.tensorflow.google.cn/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl
 
+4：Anaconda安装Tensorflow-GPU版本分为Windows和Linux两种版本
+    
