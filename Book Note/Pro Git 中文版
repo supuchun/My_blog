@@ -1,17 +1,8 @@
-教程一：Pro Git 中文版
+Pro Git 中文版
 1、差异分析工具：git config --global merge.tool vimdiff
 2、查看提交历史：git log
 3、git分支：在 Git 中提交时，会保存一个提交（commit）对象，该对象包含一个指向暂存内容快照的指针，包含本次提交的作者等相关附属信息
     查看各个分支最后一个提交对象的信息，运行 git branch -v
     git branch -d 删除分支
-    git branch -d 强制删除该分支
-4、git remote add origin git@gitserver:/opt/git/project.git：添加到远程仓库
-
-
-
-教程二：
-
-
-
-
-教程三：
+    git branch -D 强制删除该分支
+4、git remote add origin git@gitserver:/opt/git/project.git：本地仓库添加到远程仓库

@@ -1,0 +1,64 @@
+1: commit messages
+        Title: [UT強化][BS17P-709][C1 Cvg Up] framework_unified
+        Unit: framework_unified
+        Info: add new testcase to improve C1 coverage
+
+        Title: [UT強化][BS17P-709][C1 Cvg Up] framework_unified
+        Unit: framework_unified
+        Info: add except mark
+
+        Title: [UT強化][BS17P-1050][Fix pointout] framework_unified
+        Unit: framework_unified
+        Info: Fix pointout
+ ------------------------------------------------------------------------------------------------------------------------------       
+2: Add case API
+    1-16：测试过
+        PasNPRegisterNotification                      
+        PasNPRegisterNotifications
+        PasNPUnRegisterNotification
+        PasNPUnRegisterNotifications
+        PasNPSetPersistentNotfnType
+        PasNPPersistentSync
+        PasNPGetReadyStatusOfNPP                        
+        PasNPClearPersistedData
+        PasNPSetPersistNotfnDefaultValue
+        PasNPSetFilePersistentType
+        PasNPSetPersonality
+        PasNPReleasePersistentFile                                       
+        PasNPChangePersonality
+        PasNPRegisterPersistentFile                             
+        PasNPLoadPersistentFile                    
+        PasNPReadPersistedData                                   
+    17-26：自主追加
+        PasNPSetFolderPersistentType                         10         
+        PasNPSetFilePersistentType                           10  
+        PasNPRegisterPersistentFolder                        6
+        PasNPLoadPersistentFolder                            10
+        PasNPReleasePersistentFolder                         12
+        PasSendStopToNSNPP                                   4
+        PasNPSavePersistentData                          dead code 
+        PasNPRegisterImmediatePersistNotification            5
+        PasRegisterPersistentStorage                         5
+        PasReleaseFileToPersistentStorage                    5
+
+    27：自主追加
+        NPRegisterNotification                               6             
+-------------------------------------------------------------------------------------------------------------------------------
+
+3:work plan
+                                                              8.10 case个数 30                        8.17 case个数 25
+        NS_NPServiceIf	
+        NS_UtilityCenter	
+        NS_ConfigParser	
+        NS_FrameworkCore	pas_framework_npservice.cpp
+
+
+const char kDirPathNPP[]    = "/tmp/TestNPPService";    "/tmp/shm_memtest";   "/tmp/ring_buffer";
+
+pas_framework_npservice.cpp   
+25： +7
+26： +3
+27： +6
+21： +12
+12：
+15：
