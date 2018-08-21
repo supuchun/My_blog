@@ -40,7 +40,7 @@
                     print (sess.run(hello))
         8：打开新的终端使用conda命令安装anaconda-navigator：
             conda install anaconda-navigator
-            anaconda-navigator
+                                                  
 
     Ubuntu16.04下Anaconda安装完成后conda:找不到命令
         解决方案如下：
@@ -99,4 +99,4 @@
             https://download.tensorflow.google.cn/linux/gpu/tensorflow_gpu-1.8.0-cp36-cp36m-linux_x86_64.whl
 
 4：Anaconda安装Tensorflow-GPU版本分为Windows和Linux两种版本
-    
+

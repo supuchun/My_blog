@@ -80,6 +80,8 @@
             第二步:更新你的软件包源列表：$ sudo apt update 或者 $ sudo apt-get update
         方法二：
             第一步：移除 /var/lib/dpkg/ 文件夹下的锁定文件：$ sudo rm /var/lib/dpkg/lock
-            第二步:强制重新配置软件包：$ $ sudo dpkg --configure -a
+            第二步:强制重新配置软件包：$ sudo dpkg --configure -a
 
 11、终端颜色设置：文字颜色设为#708284，背景颜色设为#07242E
+
+12：pip升级操作 python -m pip install -U pip setuptools
