@@ -80,3 +80,45 @@
             p2   = (char *)malloc(20); //分配得来得10和20字节的区域就在堆区。
             strcpy(p1, "123456");   //123456/0放在常量区，编译器可能会将它与p3所指向的"123456"优化成一个地方。
         }
+
+11、linux--进程在内存中的布局
+    代码区:程序(函数)代码所在,由编译而得到的二进制代码被载入至此.代码区是只读的!有执行权限.代码区一般都从0x08048000地址开始(linux下).值得注意的是,字符串字面值(如"Hello World")就存储在这个区.
+　　数据段和BSS段:合称静态区(全局区),用来存储静态(全局)变量.区别是 前者(数据段)存储的是已初始化的静态(全局)变量,可读写. 后者(BSS段)存储的是未初始化的静态(全局)变量,可读写.
+　　堆:自由存储区.不像全局变量和局部变量的生命周期被严格定义,堆区的内存分配和释放是由程序员所控制的.申请方式:C中是malloc函数,C++中是new标识符.
+　　栈:由系统自动分配和释放.存储局部(自动)变量. 一般说的堆栈,其实是指栈!另外,值得注意的是,堆是由低地址向高地址分配空间;栈却是由高地址向低地址分配空间.
+    静态(static)全局变量 和 静态(static)局部变量 都在 静态全局区.
+        #include <stdio.h>
+        #include <stdlib.h>
+        int i1 = 10; //静态全局区(data段)
+        int i2; //静态全局区(bss段)
+        static int i3 = 30; //静态全局区(data段)
+        const int i4 = 40;  //代码区!!!
+        void fun(int i5) //栈区
+        {
+            int i6 = 60; //栈区
+            static int i7 = 70; //静态全局区(data段)
+            const int i8 = 80; //栈区!!!
+            char* str1 = "ABCDE"; //代码区(字符串常量)
+            char str2[] = "ABCDE"; //栈区(字符数组)
+            int* pi = malloc(sizeof(int)); //堆区
+            printf("&i5=%p\n", &i5);
+            printf("&i6=%p\n", &i6);
+            printf("&i7=%p\n", &i7);
+            printf("&i8=%p\n", &i8);
+            printf("str1=%p\n", str1);
+            printf("str2=%p\n", str2);
+            printf("pi=%p\n", pi);
+            free(pi);
+        }
+        
+        int main(void)
+        {
+            printf("&i1=%p\n", &i1);
+            printf("&i2=%p\n", &i2);
+            printf("&i3=%p\n", &i3);
+            printf("&i4=%p\n", &i4);
+            fun(50);
+            return 0;
+        }
+
+12、main(int argc, char*argv[])这个函数中两个参数的意义，argc记录的是命令行中输入参数的数目，argv是一个拥有argc个元素的字符串数组，每个元素保存一个命令行中输入的参数。
