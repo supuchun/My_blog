@@ -22,8 +22,8 @@
         sudo apt-get install ibus
         sudo apt-get install ibus-sunpinyin ibus-libpinyin ibus-anthy ibus-mozc
         logout -> login一下
-        system setting  ->text entry  -> 点击 + 添加输入法  ->ibus  -> 选择 chinese
-        logout -> login一下就可以使用了
+        system setting ->text entry -> 点击 + 添加输入法 ->ibus -> 选择 chinese
+        logout -> login 一下就可以使用了
     2：安装搜狗输入法
         方式一：（已经验证可行性）
             1：下载Linux版本的搜狗输入法安装包：sougou_64.deb
