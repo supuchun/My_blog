@@ -1,17 +1,61 @@
-1：Telema
+1、CAN总线
+    CAN网络_早期基本结构图
+        1、BCM（车身控制器）为控制中心
+        2、ECU（电子控制单元）是汽车专用微机控制器, 一个ECU一般负责1个或多个智能硬件设备
+    CAN网络_当今主流结构图
+        当今的燃油车整车CAN网络主要以网关为控制中心，网关管理了5条CAN总线的各类ECU，每条CAN总线都是由2根线组成的双绞线构成,一根can_high, 一根can_low, 分别代表高电平, 低电平。
+        1、PCAN (PowerTrain CAN ) ☞ 动力总成CAN总线
+            这条CAN总线主要负责车辆动力及最高安全级.
+            这条CAN总线上一般有以下ECU:
+            ECM ( Engine Control Module ) 发动机控制模块
+            SRS ( SupplementalRestraintSystem) 电子安全气囊
+            BMS ( Battery Management System ) 电池管理系统
+            PCAN上是整车CAN网络信号优先级及信号传输速率最高的一条CAN总线.
+        2、CCAN (Chassis CAN)  ☞ 底盘控制CAN总线
+            这条CAN总线主要负责汽车底盘及4个轮子的制动/稳定/转向
+            这条CAN总线上一般有以下ECU:
+            ABS ( Antilock Brake System ) 防抱死制动系统
+            ESP(Electronic Stability Program)车身电子稳定系统
+            EPS(Electric Power Steering)电子转向助力
+            CCAN由于涉及整车制动/助力转向等, 所以其网络信号优先级也是较高的.
+        3、BCAN ( Body CAN )☞ 车身控制总线 
+            这条CAN总线主要车身上的一些提高舒适性/安全性的智能硬件的管理与控制
+            这条CAN总线上一般有以下ECU:
+            AC ( Air Condition ) 空调
+            AVM(Around View Monitor) 360环视
+            BCM(Body Control Module) 天窗, 车窗, 雾灯, 转向灯, 雨刮...
+            IMMO(Immobilizer) 发动机防盗系统
+            TPMS(Tire Pressure Monitoring System) 胎压监控系统
+            BCAN其网络信号优先级也是较低, 因为以上设备都是辅助设备.
+        4、ECAN ( Entertainment  CAN ) ☞ 娱乐系统总线
+            这条CAN总线主要车身上的一些提高娱乐性的智能硬件的管理与控制
+            这条CAN总线上一般有以下ECU:
+            VAES( Video Audio Entertainment System) 车载娱乐系统(中控)
+            IPK(Instrument Pack) 组合仪表, 当今的数字仪表, 基本有音乐, 地图, 通话等娱乐功能.
+            ECAN, 也是辅助可选设备, 所以优先级也是较低的.
+        5、DCAN ( Diagnose CAN ) ☞ 诊断控制总线
+            这条CAN总线主要提供远程诊断功能
+            这条CAN总线上只有一个ECU:
+            Tbox(Telematics BOX) 远程控制模块
 
-2：G-Book
-
-3: SoC
+2: SoC
         
-4：TBox
+3：T-Box
+
+4：Telema
+
+5：G-Book
     
-5、车载智能系统
+6、车载智能系统
 
-6、IOV-车联网
+7、IOV（车联网）
+    指以车内网、车际网和车载移动互联网为基础，按照约定的通信协议和数据交互标准，在车-X（X：车、路、行人及互联网等）之间，进行无线通讯和信息交换的大系统网络，车联网的目的，是实现智能化交通管理、智能动态信息服务和车辆的智能化控制。
+    车内网，也就是位于汽车内部的网络通信。这其中包括车载显示器、车载传感器与控制器、以及车载资讯中心等。
+        车内网部分，主要是负责采集与获取车辆的智能信息。我们最熟悉的就是OBD，也就是车载诊断系统。   
+    车际网，主要是为了监测街上行驶的其他车辆的速度、位置等对其他驾驶员无法开放的隐私数据，同时自动预测出在该车行车道路前方是否有发生碰撞的可能。
+        车际网，主要是为了解决车与车、车与路、车与网、车与人等的互联互通。
+    车载移动互联网，主要是指利用车载网关同外部移动互联网和互联网实现互联互通，这也是我们最熟悉的一个部分。
+        车载移动互联网，则是指利用车载4G，实现汽车同智能手机、移动互联网和互联网的互联互通。
+8、无人驾驶
 
-7、无人驾驶
-
-8、CAN总线
-
-9、BCM
+9、OBD（车载自动诊断系统）
