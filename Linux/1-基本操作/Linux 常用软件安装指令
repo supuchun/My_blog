@@ -53,6 +53,5 @@
             10：设置->语言支持->键盘输入方式 选择“fcitx”，重启电脑即可
 
     3：synergy 安装
-        sudo apt-get  install quicksynergy
-        (quicksynergy &)
+        sudo apt-get  install synergy
 
