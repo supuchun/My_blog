@@ -1,0 +1,38 @@
+// 自定义异常类
+class MyException
+{
+public:
+    MyException()
+    {
+    }
+
+    MyException(char* str)
+    {
+        msg = str;
+    }
+
+    MyException(MyException& rhs)
+    {
+        this->msg = rhs.msg;
+    }
+
+    std::string msg;
+};
+
+// 抛出异常
+void CallWithException()
+    {
+        char msg[1024] = { 0 };
+        sprintf(msg, "Exception: %s", "shit");
+        throw MyException(msg);
+    }
+
+// 捕捉异常
+try
+    {
+        CallWithException();
+    }
+    catch (MyException& e)
+    {
+        cout << e.msg;
+    }
