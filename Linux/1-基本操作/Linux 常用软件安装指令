@@ -12,6 +12,7 @@
 2：linux下安装sublime Text 3:
         方式一：下载安装包安装
             sudo dpkg -i sublime-text——build-3126——amd64.deb
+            sudo dpkg -i sublime-text_build-3083_amd64.deb
         方式二：指令安装
             sudo add-apt-repository ppa:webupd8team/sublime-text-3
             sudo apt-get update 
