@@ -1,5 +1,8 @@
-1、import pandas as pd   //数据分析，代码基于numpy
+1、Python方向
+        AI：机器学习、深度学习、数据挖掘：爬虫Scrapy、数据分析
+        Web：Flask、Django
+        python脚本
+
+2、import pandas as pd   //数据分析，代码基于numpy
     import numpy as np    //处理数据，代码基于ndarray
     import matplotlib.pyplot as plt      //画图
-
-2、
