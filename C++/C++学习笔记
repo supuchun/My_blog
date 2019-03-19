@@ -423,4 +423,104 @@ delete pStu;  //删除对象
         5) 构造函数不能是虚函数。对于基类的构造函数，它仅仅是在派生类构造函数中被调用，这种机制不同于继承。也就是说，派生类不继承基类的构造函数，将构造函数声明为虚函数没有什么意义。
         6) 析构函数可以声明为虚函数，而且有时候必须要声明为虚函数，这点我们将在下节中讲解。
 
-19、
+19、序列化/反序列化API
+    //C++string序列化/反序列化API
+    bool SerializeToString(string* output) const;
+    bool ParseFromString(const string& data);
+    //使用：
+    void set_people()             
+    {
+        wp.set_name("sealyao");   
+        wp.set_id(123456);        
+        wp.set_email("sealyaog@gmail.com");
+        wp.SerializeToString(&pstring);
+    }
+    
+    void get_people()             
+    {
+        rsp.ParseFromString(pstring);  
+        cout << "Get People from String:" << endl;
+        cout << "\t Name : " <<rsp.name() << endl;
+        cout << "\t Id : " << rsp.id() << endl;
+        cout << "\t email : " << rsp.email() << endl;
+    }
+
+    //文件描述符的序列化/反序列化API
+    bool SerializeToFileDescriptor(int file_descriptor) const;
+    bool ParseFromFileDescriptor(int file_descriptor);
+    
+    //使用:
+    void set_people()
+    {
+        fd = open(path,O_CREAT|O_TRUNC|O_RDWR,0644);
+        if(fd <= 0){
+            perror("open");
+            exit(0); 
+        }   
+        wp.set_name("sealyaog");
+        wp.set_id(123456);
+        wp.set_email("sealyaog@gmail.com");
+        wp.SerializeToFileDescriptor(fd);   
+        close(fd);
+    }
+    
+    void get_people()
+    {
+        fd = open(path,O_RDONLY);
+        if(fd <= 0){
+            perror("open");
+            exit(0);
+        }
+        rp.ParseFromFileDescriptor(fd);
+        std::cout << "Get People from FD:" << endl;
+        std::cout << "\t Name : " <<rp.name() << endl;
+        std::cout << "\t Id : " << rp.id() << endl;
+        std::cout << "\t email : " << rp.email() << endl;
+        close(fd);
+    }
+
+20、java转换C++时，jni的GetStringUTFChars(a, NULL)的参数a如果是null的话，会crash掉
+
+21、C++异常处理
+    // 自定义异常类
+    class MyException
+    {
+    public:
+        MyException()
+        {
+        }
+
+        MyException(char* str)
+        {
+            msg = str;
+        }
+
+        MyException(MyException& rhs)
+        {
+            this->msg = rhs.msg;
+        }
+
+        std::string msg;
+    };
+
+    // 抛出异常
+    void CallWithException()
+        {
+            char msg[1024] = { 0 };
+            sprintf(msg, "Exception: %s", "shit");
+            throw MyException(msg);
+        }
+
+    // 捕捉异常
+    try
+        {
+            CallWithException();
+        }
+        catch (MyException& e)
+        {
+            cout << e.msg;
+        }
+
+22、同 C 语言类似，C++ 模块化编程在 .cpp 文件（C 语言中是.c）中定义函数，在 .h 文件（ C 语言也是.h）中声明函数和类。
+
+23、将项目的代码分门别类、有规划地放到不同的源文件中，即所谓的模块化编程（也称为多文件编程）。
