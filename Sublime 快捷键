@@ -1,7 +1,7 @@
 														sublime快捷键
 	Ctrl+G：查找line
-	Ctrl+F：目录下文件查找
-	Ctrl+Shift+F：all目录下文件查找
+	Ctrl+F：文件下查找
+	Ctrl+Shift+F：目录下查找
 	Ctrl+h：替代
 	Ctrl+r：查找关键词对应的所有函数接口
 	Ctrl+P： @/#/：。。。。to anything
