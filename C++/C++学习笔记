@@ -524,3 +524,46 @@ delete pStu;  //删除对象
 22、同 C 语言类似，C++ 模块化编程在 .cpp 文件（C 语言中是.c）中定义函数，在 .h 文件（ C 语言也是.h）中声明函数和类。
 
 23、将项目的代码分门别类、有规划地放到不同的源文件中，即所谓的模块化编程（也称为多文件编程）。
+
+24、int a; int *p; p=&a 或 int a; int *p=&a 或 int a=10; int *p; p=&a；
+
+25、vect.push_back (value) //在 vect 的最后一个元素中存储
+    vect.pop_back () ; //移除 vect 的最后一个元素，大小减去1
+    reverse() //反转 vect 中元素的顺序
+    
+    // vector
+     vector<int> vec1;    //默认初始化，vec1为空
+     vector<int> vec2(vec1);  //使用vec1初始化vec2
+     vector<int> vec3(vec1.begin(),vec1.end());//使用vec1初始化vec2
+     vector<int> vec4(10);    //10个值为0的元素
+     vector<int> vec5(10,4);  //10个值为4的元素
+  
+     //2.常用操作方法
+     vec1.push_back(100);            //尾部添加元素
+     int size = vec1.size();         //元素个数
+     bool isEmpty = vec1.empty();    //判断是否为空
+     cout<<vec1[0]<<endl;        //取得第一个元素
+     vec1.insert(vec1.end(),5,3);    //从vec1.back位置插入5个值为3的元素
+     vec1.pop_back();              //删除末尾元素
+     vec1.erase(vec1.begin(),vec1.begin()+2);//删除vec1[0]-vec1[2]之间的元素，不包括vec1[2]其他元素前移
+    cout<<(vec1==vec2)?true:false;  //判断是否相等==、！=、>=、<=...
+     vector<int>::iterator iter = vec1.begin();    //获取迭代器首地址
+    vector<int>::const_iterator c_iter = vec1.begin();   //获取const类型迭代器
+    vec1.clear();                 //清空元素
+  
+     //3.遍历
+     //下标法
+    int length = vec1.size();
+     for(int i=0;i<length;i++)
+     {
+        cout<<vec1[i];
+     }
+     cout<<endl<<endl;
+     //迭代器法
+    vector<int>::iterator iter = vec1.begin();
+     for(;iter != vec1.end();iter++)
+     {
+        cout<<*iter;
+     }
+
+26、
