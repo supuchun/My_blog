@@ -1,0 +1,37 @@
+Android keystore的简单介绍
+ 	以Java为例：通过KeyStore类getEntry() 或者getKey()来提取私钥；通过Certificate类getPublicKey()获取公钥。
+	Keytool是一个Java数据证书的管理工具,用keytool生成密钥库和公钥证书，Keytool将密钥库（key）和公钥证书（ertificates）存在一个称为keystore的文件中，
+	然后通过代码方式获得文件和BASE64串形式的公私密钥对。
+	在keystore里，包含两种数据： 
+		1. 密钥实体（Key entity）——密钥库（secret key）又或者是私钥和配对公钥（采用非对称加密），其中私钥是存在TEE里面的。
+		2. 可信任的公钥证书实体（trusted certificate entries）——只包含公钥。
+
+TEE(Trusted Execution Environment)，可信执行环境，该环境可以保证不被常规操作系统干扰的计算，因此称为”可信”。
+TEE内部API主要包含了密钥管理，密码算法，安全存储，安全时钟资源和服务，还有扩展的可信UI等API。
+对于抗攻击性，SE最高，Rich OS很低；TEE则提供了合适的保护强度，并且平衡了成本和易开发性。
+	TEE通常用于运行关键的操作：
+		(1)、移动支付：指纹验证、PIN码输入等；
+		(2)、机密数据：私钥、证书等的安全存储；
+		(3)、内容包括：DRM(数字版权保护)等。
+
+RSA加密算法：用了JDK自带的密钥 KeyPairGenerator 密钥生成公钥私钥,每次生成的都不一样，代码如下
+KeyPairGenerator kpg = null;
+        try {
+            kpg = KeyPairGenerator.getInstance("RSA");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        kpg.initialize(1024);
+        KeyPair kp = kpg.generateKeyPair();
+        RSAPublicKey publicKey = (RSAPublicKey) kp.getPublic();
+        RSAPrivateCrtKey privateKey = (RSAPrivateCrtKey) kp.getPrivate();
+        System.out.println(parseByte2HexStr(publicKey.getEncoded()));
+        System.out.println(parseByte2HexStr(privateKey.getEncoded()));
+
+ encode 和encrypt区别
+ 	encode：将文字材料等进行编码，编制成计算机语言，如：BASE64Encode，BASE64Decode，从...格式转为...格式
+	encrypt：加密，将…用秘钥进行加密，如公钥加密，私钥解密
+	在一个类中进行加密，同时使用到Encode和Encrypt。用Encrypt的秘钥进行加密，用Encode进行编码，如BASE64Encoder()，
+	从byte格式转为base64格式,编制成计算机语言。
+---------------------------------------------------------------------- 
+1、Java接口中只能包含public、static、final类型的成员变量和public、abstract类型的成员方法。
