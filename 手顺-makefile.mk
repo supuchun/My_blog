@@ -1,0 +1,17 @@
+LOCAL_PATH:= $(call my-dir)
+
+include $(CLEAR_VARS)
+
+LOCAL_MODULE:= libdmclientservice
+LOCAL_MODULE_TAGS := optional
+LOCAL_CFLAGS += -std=gnu++11
+LOCAL_LDFLAGS := -lpthread -lrt -ldl
+
+LOCAL_SRC_FILES := 
+LOCAL_C_INCLUDES := 
+LOCAL_ADDITIONAL_DEPENDENCIES := 
+LOCAL_SHARED_LIBRARIES :=   
+LOCAL_STATIC_LIBRARIES := 
+
+LOCAL_EXPORT_SYMBOLS := true
+include $(BUILD_STATIC_LIBRARY)
