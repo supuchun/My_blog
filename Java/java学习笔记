@@ -1,4 +1,4 @@
-Android keystore的简单介绍
+1、Android keystore的简单介绍
  	以Java为例：通过KeyStore类getEntry() 或者getKey()来提取私钥；通过Certificate类getPublicKey()获取公钥。
 	Keytool是一个Java数据证书的管理工具,用keytool生成密钥库和公钥证书，Keytool将密钥库（key）和公钥证书（ertificates）存在一个称为keystore的文件中，
 	然后通过代码方式获得文件和BASE64串形式的公私密钥对。
@@ -33,5 +33,55 @@ KeyPairGenerator kpg = null;
 	encrypt：加密，将…用秘钥进行加密，如公钥加密，私钥解密
 	在一个类中进行加密，同时使用到Encode和Encrypt。用Encrypt的秘钥进行加密，用Encode进行编码，如BASE64Encoder()，
 	从byte格式转为base64格式,编制成计算机语言。
----------------------------------------------------------------------- 
-1、Java接口中只能包含public、static、final类型的成员变量和public、abstract类型的成员方法。
+
+2、Java接口中只能包含public、static、final类型的成员变量和public、abstract类型的成员方法。
+
+3、Android IPC Binder
+	Linux IPC 相关概念和通信原理：跨进程通信是需要内核空间做支持的。传统的 IPC 机制如管道、Socket 都是内核的一部分，因此通过内核支持来实现进程间通信自然是没问题的。但是 Binder 并不是 Linux 系统内核的一部分，
+	那怎么办呢？这就得益于 Linux 的动态内核可加载模块（Loadable Kernel Module，LKM）的机制；模块是具有独立功能的程序，它可以被单独编译，但是不能独立运行。
+	它在运行时被链接到内核作为内核的一部分运行。这样，Android 系统就可以通过动态添加一个内核模块运行在内核空间，用户进程之间通过这个内核模块作为桥梁来实现通信。
+	在 Android 系统中，这个运行在内核空间，负责各个用户进程通过 Binder 实现通信的内核模块就叫 Binder 驱动（Binder Dirver）。
+	Binder 并不存在物理介质，因此 Binder 驱动使用 mmap() 并不是为了在物理介质和用户空间之间建立映射，而是用来在内核空间创建数据接收的缓存空间。
+	一次完整的 Binder IPC 通信过程通常是这样：
+		首先 Binder 驱动在内核空间创建一个数据接收缓存区；
+		接着在内核空间开辟一块内核缓存区，建立内核缓存区和内核中数据接收缓存区之间的映射关系，以及内核中数据接收缓存区和接收进程用户空间地址的映射关系；
+		发送方进程通过系统调用 copy_from_user() 将数据 copy 到内核中的内核缓存区，由于内核缓存区和接收进程的用户空间存在内存映射，因此也就相当于把数据发送到了接收进程的用户空间，
+			这样便完成了一次进程间的通信。
+			
+	Binder 通信模型：Binder 是基于 C/S 架构的。由一系列的组件组成，包括 Client、Server、ServiceManager、Binder 驱动。其中 Client、Server、Service Manager 运行在用户空间，Binder 驱动运行在内核空间。
+	其中 Service Manager 和 Binder 驱动由系统提供，而 Client、Server 由应用程序来实现。Client、Server 和 ServiceManager 均是通过系统调用 open、mmap 和 ioctl 来访问设备文件 /dev/binder，
+	从而实现与 Binder 驱动的交互来间接的实现跨进程通信。
+	Client、Server、ServiceManager、Binder 驱动这几个组件在通信过程中扮演的角色就如同互联网中服务器（Server）、客户端（Client）、DNS域名服务器（ServiceManager）以及路由器（Binder 驱动）之前的关系。
+
+	Binder 通信过程：
+	首先，一个进程使用 BINDER_SET_CONTEXT_MGR 命令通过 Binder 驱动将自己注册成为 ServiceManager；
+	Server 通过驱动向 ServiceManager 中注册 Binder（Server 中的 Binder 实体），表明可以对外提供服务。驱动为这个 Binder 创建位于内核中的实体节点以及 ServiceManager 对实体的引用，
+	将名字以及新建的引用打包传给 ServiceManager，ServiceManger 将其填入查找表。
+	Client 通过名字，在 Binder 驱动的帮助下从 ServiceManager 中获取到对 Binder 实体的引用，通过这个引用就能实现和 Server 进程的通信。
+	我们看到整个通信过程都需要 Binder 驱动的接入。
+	Service Manager是一个守护进程，用来管理Server，并向Client提供查询Server接口的能力。
+	一个进程空间分为 用户空间 & 内核空间（Kernel），即把进程内用户&内核隔离开来。
+	二者区别：
+		进程间，用户空间的数据不可共享，所以用户空间 = 不可共享空间
+		进程间，内核空间的数据可共享，所以内核空间 = 可共享空间
+		
+	进程内用户空间&内核空间进行交互需通过系统调用，主要通过函数：
+		copy_from_user（）：将用户空间的数据拷贝到内核空间
+		copy_to_user（）：将内核空间的数据拷贝到用户空间
+
+	一个进程的Binder线程数默认最大是16，超过的请求会被阻塞等待空闲的Binder线程。
+
+
+	用户空间访问内核空间的唯一方式就是系统调用；通过这个统一入口接口，所有的资源访问都是在内核的控制下执行，以免导致对用户程序对系统资源的越权访问，从而保障了系统的安全和稳定。
+
+	深入理解Java层的Binder
+		IBinder/IInterface：AIDL/Binder/BinderProxy/Stub
+		IBinder是一个接口，它代表了一种跨进程传输的能力；只要实现了这个接口，就能将这个对象进行跨进程传递；这是驱动底层支持的；在跨进程数据流经驱动的时候，驱动会识别IBinder类型的数据，
+			从而自动完成不同进程Binder本地对象以及Binder代理对象的转换。
+		IBinder负责数据传输，那么client与server端的调用契约（这里不用接口避免混淆）呢？这里的IInterface代表的就是远程server对象具有什么能力。具体来说，就是aidl里面的接口。
+		Java层的Binder类，代表的其实就是Binder本地对象。BinderProxy类是Binder类的一个内部类，它代表远程进程的Binder对象的本地代理；这两个类都继承自IBinder, 因而都具有跨进程传输的能力；
+			实际上，在跨越进程的时候，Binder驱动会自动完成这两个对象的转换。
+		在使用AIDL的时候，编译工具会给我们生成一个Stub的静态内部类；这个类继承了Binder, 说明它是一个Binder本地对象，它实现了IInterface接口，表明它具有远程Server承诺给Client的能力；
+			Stub是一个抽象类，具体的IInterface的相关实现需要我们手动完成，这里使用了策略模式。
+
+4、

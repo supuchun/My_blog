@@ -1,5 +1,4 @@
-@@ -1,344 +0,0 @@
-简要介绍：Linux主要有三个方向：运维、应用、底层，而Linux C/C++ 开发（Linux 服务器开发）这个方向
+0、简要介绍：Linux主要有三个方向：运维、应用、底层，而Linux C/C++ 开发（Linux 服务器开发）这个方向
     目前从事 Linux C/C++ 开发的程序员很多，尤其是像百度、腾讯、阿里这样的大公司，他们的网站流量巨大，业务逻辑复杂，会遇到很多瓶颈，需要开发底层服务来提高程序效率，快速响应用户请求。
     这些公司的 Linux C/C++ 开发属于底层开发（后台服务、算法支持等），而不是应用开发，编写的程序在后台运行，没有界面，不直接面向用户。
     有了数年应用开发的经验，对用户、业务、交互等都非常了解了，转底层开发很容易，也知道应用层的瓶颈在哪里，明白如何在底层做优化。
@@ -579,4 +578,146 @@ delete pStu;  //删除对象
 
     3、智能指针能够使C++的开发简单化，主要是它能够像其它限制性语言（如C#、VB）自动管理内存的释放。智能指针是一种像指针的C++对象，但它能够在对象不使用的时候自己销毁掉。
 
-27、
+27、多线程
+c++多线程有几种实现方法
+    1.直接使用操作系统API
+        windows下通过api CreateThread，linux下则常用pthread库，这些都是最底层的实现。
+            linux：pthread_create(&threads[i], NULL, PrintHello, (void *)&td[i]); pthread_join(threads[i], &status);
+    2.使用标准C++线程支持库（可跨平台）
+        最新的C++11标准里增加了std::thread多线程库。
+        int main() 
+        {
+            std::thread threadObj( (DisplayThread()) );
+            for(int i = 0; i < 10000; i++)
+            std::cout<<"Display From Main Thread "<<std::endl;
+            std::cout<<"Waiting For Thread to complete"<<std::endl;
+            threadObj.join();
+            std::cout<<"Exiting from Main Thread"<<std::endl;
+            return 0;
+        }
+    3.使用第三方线程库
+        第三方库的话比如boost的thread等，不推荐使用vc自家的_beginthread，尤其有跨平台需求的时候。
+
+多线程Java多线程方式
+    Java中创建线程主要有4种方式：实现Runnable接口这种方式更受欢迎，因为这不需要继承Thread类。
+        1.继承Thread类创建线程类（真正意义上的线程类），是Runnable接口的实现。
+            （1）定义Thread类的子类，并重写该类的run方法，该run方法的方法体就代表了线程要完成的任务。因此把run()方法称为执行体。
+            （2）创建Thread子类的实例，即创建了线程对象。
+            （3）调用线程对象的start()方法来启动该线程。
+        2.实现Runnable接口创建线程类，并重写里面的run方法。
+            （1）定义runnable接口的实现类，并重写该接口的run()方法，该run()方法的方法体同样是该线程的线程执行体。
+            （2）创建 Runnable实现类的实例，并依此实例作为Thread的target来创建Thread对象，该Thread对象才是真正的线程对象。
+            （3）调用线程对象的start()方法来启动该线程。
+        3.应用程序可以使用Executor框架来创建线程池。Executor框架是juc里提供的线程池的实现。
+        4.实现Callable接口创建线程类，重写call（）方法。Callable是类似于Runnable的接口，是属于Executor框架中的功能类。通过FutureTask包装器来创建Thread线程。
+
+    Runnable和Thread：创建多线程比较
+    Thread实现了Runnable接口并进行了扩展,而Thread和Runnable的实质是实现的关系，效果上没区别，写法上的区别而已。
+    无论使用Runnable还是Thread，都有一个new Thread的过程，效果上最后都是new Thread，然后执行run方法,写法上的区别无非就是你是new Thead还是new你自定义的thread，
+    如果你有复杂的多线程操作需求，那就自定义Thread，如果只是简单的在子线程run一下多任务，那就自己实现runnable，当然如果自己实现runnable的话可以多一个继承。（自定义Thread继承(extends)
+    Thread类，java单继承规定导致不能在继承别的了，而自定义的Runnable类只是对Runnable的实现implements，还可以继承其他类）。
+    调用start()后，线程会被放到等待队列，等待CPU调度，并不一定要马上开始执行，只是将这个线程置于可动行状态。然后通过JVM，线程Thread会调用run()方法，执行本线程的线程体。先调用start后调用run，这么麻烦，为了不直接调用run？就是为了实现多线程的优点，没这个start不行。start()方法来启动线程，真正实现了多线程运行。这时无需等待run方法体代码执行完毕，可以直接继续执行下面的代码；通过调用Thread类的start()方法来启动一个线程，这时此线程是处于就绪状态，并没有运行。然后通过此Thread类调用方法run()来完成其运行操作的，这里方法run()称为线程体，它包含了要执行的这个线程的内容，Run方法运行结束，此线程终止。然后CPU再调度其它线程。run()方法当作普通方法的方式调用。runnable其实相对于一个task，并不具有线程的概念，如果你直接去调用runnable的run，
+    其实就是相当于直接在主线程中执行了一个函数而已，并未开启线程去执行,如果你在代码中直接通过这种方式run了一个runnable，明显您的程序的主线程就直接悲催了，各种资源不足现象的崩溃日志会接踵而至。
+    总结：
+    1.Runnable和Thread相比优点有：
+    （1）由于Java不允许多继承，因此实现了Runnable接口可以再继承其他类，但是Thread明显不可以。
+    （2）Runnable可以实现多个相同的程序代码的线程去共享同一个资源，而Thread并不是不可以，而是相比于Runnable来说，不太适合，    具体原因文章中有。
+    2.Runnable为什么不可以直接run
+      Runnable其实相对于一个Task，并不具有线程的概念，如果你直接去调用Runnable的run，其实就是相当于直接在主线程中执行了一个函数而已，并未开启线程去执行，程序的主线程就直接悲催了。
+
+    Runnable：适合多线程跑同一个任务，对自定义的Runnable类进行new Thread(new xxxRunnable(sesion)).start()。自定义的Runnable类只是对Runnable的实现，还可以继承其他类。
+        public static void main(String[] args) {  
+                // TODO Auto-generated method stub  
+                MyThread m = new MyThread/MyRunnable();  
+                    new Thread(m).start();  // 多线程同时跑同一个任务
+                    new Thread(m).start();        
+            }  
+        class MyThread/MyRunnable implements Runnable{    
+            private int ticket = 5;    
+            public void run(){    
+                 while(true){  
+                     System.out.println("Runnable ticket = " + ticket--);    
+                     if(ticket < 0){    
+                        break;  
+                     }    
+                 }   
+            }    
+        }  
+        输出结果：
+            Runnable ticket = 5  
+            Runnable ticket = 4  
+            Runnable ticket = 3  
+            Runnable ticket = 2  
+            Runnable ticket = 1  
+            Runnable ticket = 0 
+
+        public static void main(String[] args) {  
+                // TODO Auto-generated method stub  
+                    new Thread(new MyThread/MyRunnable()).start();  // 多线程跑不同任务，跑各自的任务
+                    new Thread(new MyThread/MyRunnable()).start();        
+            }  
+        class MyThread/MyRunnable implements Runnable{    
+            private int ticket = 5;    
+            public void run(){    
+                 while(true){  
+                     System.out.println("Runnable ticket = " + ticket--);    
+                     if(ticket < 0){    
+                        break;  
+                     }    
+                 }   
+            }    
+        }
+        输出结果：
+            Thread ticket = 5  
+            Thread ticket = 5  
+            Thread ticket = 4  
+            Thread ticket = 4  
+            Thread ticket = 3  
+            Thread ticket = 2  
+            Thread ticket = 3  
+            Thread ticket = 1  
+            Thread ticket = 2  
+            Thread ticket = 0  
+            Thread ticket = 1  
+            Thread ticket = 0
+
+    Thread：适合多线程跑不同的多个任务，对自定义的Thread进行new xxxThread.start()。自定义Thread继承Thread类，java单继承规定导致不能在继承别的了。
+        public static void main(String[] args) {  
+                // TODO Auto-generated method stub  
+                MyThread m=new MyThread();  
+                    m.start();  // 多线程同时跑同一个任务
+                    m.start();        
+            }  
+        class MyThread extends Thread{    
+            private int ticket = 5;    
+            public void run(){    
+                 while(true){  
+                     System.out.println("Runnable ticket = " + ticket--);    
+                     if(ticket < 0){    
+                        break;  
+                     }    
+                 }   
+            }    
+        }
+        输出结果：参考Runnable1
+
+        public static void main(String[] args) {  
+                // TODO Auto-generated method stub  
+                      
+                    new MyThread().start();  // 多线程跑不同任务，跑各自的任务
+                    new MyThread().start();   
+            }  
+        class MyThread extends Thread{    
+            private int ticket = 5;    
+            public void run(){    
+                 while(true){  
+                     System.out.println("Thread ticket = " + ticket--);    
+                     if(ticket < 0){    
+                        break;  
+                     }    
+                 }    
+            }    
+        } 
+        输出结果：参考Runnable2
+
+28、
