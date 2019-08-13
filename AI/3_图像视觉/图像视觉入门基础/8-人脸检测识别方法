@@ -1,4 +1,4 @@
-1、人脸识别算法总结
+1、人脸检测识别算法总结
         第一步：人脸检测：人脸检测建议首先尝试OpenCV DNN方法与Dlib HOG方法，然后再做决定。
             1）OpenCV
                 1.Haar Cascade
