@@ -1,0 +1,15 @@
+Autosar是AUTOmotive Open System Architecture(汽车开放系统架构)的缩写，是一种自上而且的近乎分层结构的软件架构。可以最大化的在微控制器上抽象为三个软件层级和一个硬件层：
+	应用层（Application），运行环境层（Runtime Environment），基础软件层（Basic Software）和微控制器层（Microcontroller）。
+	基础软件层（BSW）又可分为服务层（Services Layer）、ECU抽象层、微控制器抽象层和复杂驱动层（Complex Drivers Layer）。
+	微控制器抽象层在BSW的最底层，它包含微控制的驱动程序。
+
+	ECU抽象层接口微控制器层的，它包含外部设备的驱动。该层提供API来访问外部设备。
+	OSI分层结构中的CAN数据链路层对应AUTOSAR分层架构的微控制器抽象层和ECU抽象层。
+	复杂驱动层可集成一些特定的功能、驱动或外设。
+	服务层是基础软件层（BSW）的最高层，包含以下功能：
+	（1）提供车辆网络通信和管理服务
+	（2）内存服务
+	（3）诊断服务
+	（4）ECU状态管理和模式管理
+	（5）操作系统的功能
+	（6）诊断服务（包括UDS通信、故障存储和错误处理等）
