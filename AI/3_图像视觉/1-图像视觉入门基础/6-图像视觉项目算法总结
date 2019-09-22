@@ -1,0 +1,121 @@
+-------------------人脸识别-----------------------
+1、人脸检测
+    1.提取人脸检测特征，得到面部候选框
+        1）OpenCV
+            1.Haar Cascade
+            2.OpenCV DNN：最准确的
+                1.原始Caffe实现的16位浮点型版本（5.4MB）
+                2.TensorFlow实现的8位量化版本（2.7MB）
+        2）Dlib
+            1.HoG
+            2.Dlib CNN
+        3）face_recognition：基于Dlib开发的python库
+        4）facenet：Google的人脸识别库，基于Tensorflow，采用端对端深度学习一个从图像到欧式空间的编码方法，然后基于这个编码再做人脸识别、人脸验证和人脸聚类等。
+
+2、人脸识别
+    1.面部关键点定位，提取
+        1）Dlib，提取人脸的68个特征点
+        2）face_recognition，提取的人脸特征比Dlib更加细致，达到128个点
+        3）facenet（tf深度学习提取），提取的人脸特征的128个点       
+    2.面部特征匹配，识别
+        1）KNN
+        2）欧氏距离
+
+-------------------目标检测-----------------------
+1、one-stage：YOLO、SSD
+    1.YOLO（You Only Look Once）：YOLOv1、YOLOv2、YOLOv3
+    2.SSD（Single Shot MultiBox Detectorz）   
+    One-Stage目标检测算法：使用固定网格上的检测器，YOLOv3和SSD非常相似，尽管它们是通过不同的方法得到网格（YOLO使用升序采样，SSD使用降序采样）。
+    One-Stage目标检测算法可以在一个stage直接产生物体的类别概率和位置坐标值，相比于Two-Stage的目标检测算法不需要Region Proposal阶段，整体流程较为简单。
+    
+2、two-stage：R-CNN系列,主要是2D的目标检测
+    1.R-CNN
+    2.Fast R-CNN
+    3.Faster R-CNN：主要是2D的目标检测
+    two-stage目标检测算法：基于候选框的目标检测方法，实际上Faster R-CNN中RPN网络也采用网格检测。
+    Two-Stage目标检测算法可以看作是进行两次One-Stage检测，第一个Stage初步检测出物体位置，第二个Stage对第一个阶段的结果做进一步的精化，对每一个候选区域进行One-Stage检测。
+
+3、Faster R-CNN、YOLO、SSD对比
+    1.anchor boxes size取法不同
+        SSD的anchor boxes是算出来的
+        Faster-RCNN的是固定的
+        YOLO是用数据集的gt boxes 通过kmeans算出来的
+    2.feature extractor
+        SSD：VGG
+        YOLO：Darknet
+        Faster-RCNN：Inception-Resnet v2
+    3.Faster-RCNN慢的原因：Faster-RCNN在feature map每个像素点取9个anchor boxes之后proposal数量
+    4.R-CNN 方法的缺点是它太慢了；由于它采用外部的候选框算法，它也不是一个完整的端到端 (end-to-end) 检测器。
+        其原理大概为：(1) 预先找出图中物体可能出现的位置，即候选区域 (Region Proposal) 。利用图像中的纹理、边缘、颜色等信息，
+        可以保证在选取较少窗口 (几千甚至几百) 的情况下保持较高的召回率 (Recall) 。(2) 然后将这些候选框送入CNN网络中进行识别分类。
+    Fast R-CNN 相对R-CNN，Fast R-CNN算法有了很大改进，即提高了精确度，并减少了执行前向网络计算所需的时间；然而，该模型仍然依赖于外部的候选框算法。
+    Faster-RCNN 通过使用区域生成网络 (Region Proposal Network, RPN)来取代候选框算法，Faster R-CNN 最终成为真正的端到端目标检测器。
+    
+    5.one-stage策略比two-stage策略的精度低，但速度快得多。
+    
+4、其他:把目标检测问题转换成关键点检测问题，之后涌现了CenterNet、ExtremeNet等一系列基于关键点的目标检测。
+
+-------------------CNN经典网络-----------------------   
+1、常见的图像分类CNN经典网络模型包括：
+    VGG、ResNet、Inception、SENet和PNASNet等，这些分类模型都在ImageNet数据集上验证过精度，所以可以优先选择这些成熟的图像分类模型。
+
+2、2012年以后深度学习方法在计算机视觉领域一骑绝尘，CNN经典网络必须要知道，按先后顺序排列：
+    LeNet、AlexNet、ZF Net、VGG、GoogLeNet、ResNet、DenseNet、SENet等，还有一些轻量级的网络，比如ShuffleNet、MobileNet系列。
+        
+        
+        
+-------------------模型部署-----------------------  
+PMML全称预言模型标记语言（Predictive Model Markup Language），利用XML描述和存储数据挖掘模型，是一个已经被W3C所接受的标准。
+PMML是一种基于XML的语言，用来定义预言模型。使用pmml储存好模型之后，任何软件栈都可以调用pmml储存好的模型。
+
+-------------------python运行慢原因-----------------------   
+“它是GIL（全局解释器锁）”
+    当变量在多个线程内共享时，就出现了这个难题：CPython如何锁定引用计数。有一个“全局解释器锁”，它小心地控制线程执行。解释器一次只能执行一个操作，无论它有多少线程。
+“这是由于它是解释的，而非编译”
+    在终端上执行python myscript.py，那么CPython会启动读取、分析、解析、编译、解释和执行代码的一长串操作。
+“这是由于它是一种动态类型语言”
+    在“静态类型”语言中，你在声明变量时必须指定变量的类型。这样的语言包括C、C++、Java、C#和Go。
+    在动态类型语言中，仍然存在类型这个概念，但变量的类型是动态的。静态类型语言不是为了给你添堵而设计的，它们是兼顾CPU的运行方式设计的。
+    如果一切最终需要等同于简单的二进制操作，你就得将对象和类型转换成低级数据结构。
+    
+结论：Python之所以速度慢，主要是由于动态性和多功能性。Python有更优化、速度更快的几个替代方案：充分利用异步、深入了解分析工具以及考虑使用多个解释器
+
+对于性能优先并且有更多静态变量的代码部分，请考虑使用Cython。Cython，它结合了C-Static类型和Python来优化已知类型的代码，可以提供84倍速度的性能提升。
+
+一行代码让python的运行速度提高100倍：from numba import jit
+numba所完成的工作就是：
+    解析Python函数的ast语法树并加以改造，添加类型信息；
+    将带类型信息的ast语法树通过llvmpy动态地转换为机器码函数，然后再通过和ctypes类似的技术为机器码函数创建包装函数供Python调用。
+
+PYTHON是一种脚本语言，是解释执行的，不需要经过编译，所以很方便快捷，且能够很好地跨平台，写一些小工具小程序特别合适。
+而C++则是一种需要编译后运行语言，在特定的机器上编译后在特定的机上运行，运行效率高，安全稳定。但编译后的程序一般是不跨平台的。
+
+-------------------python调用C++-----------------------   
+Linux：编译动态链接库test.so; Windows：编译动态链接库test.dll
+1、原生态导出实现，import导入动态链接库（test.so/test.dll）
+    1、直接import导入动态链接库（test.so/test.dll）
+    2、import ctypes
+       dll = ctypes.cdll.LoadLibrary('./test.so')
+       pdll = ctypes.CDLL('/home/ubuntu/tmp/example.so')
+    Python解释器就是用C实现，编译C/C++文件生成动态链接库（test.so/test.dll）,拷到py同一个目录下,import test即可使用。
+    如果是cpp源文件，inittest函数必须用extern "C"修饰，把编写的类封装成C函数模式，如果是c源文件，则不需要。
+2、通过boost实现：
+    1、通过boost实现，import导入动态链接库（test.so/test.dll）
+    2、通过boost实现，导出类，import导入动态链接库（test.so/test.dll）
+    3、通过boost实现，导出变参函数，import导入动态链接库（test.so/test.dll）
+    4、通过boost实现，导出带Python对象的接口，import导入动态链接库（test.so/test.dll）  
+    
+-------------------C++调用python-----------------------
+C++ 调用Python流程  
+    加载python环境变量，安装目录及相关lib
+    添加头文件 #include <Python.h>
+    初始化Python环境 Py_Initialize() 
+    添加模块路径（或者说脚本路径）PyRun_SimpleString()
+    导入模块PyImport_ImportModule()
+    导入函数PyObject_GetAttrString()
+    使用函数PyObject_CallObject()
+    转换还回类型
+    获取结果PyArg_Parse()
+    结束释放Py_DECREF()、Py_Finalize()
+        
+        
