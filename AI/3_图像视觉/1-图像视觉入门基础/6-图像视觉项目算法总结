@@ -61,9 +61,18 @@
 
 2、2012年以后深度学习方法在计算机视觉领域一骑绝尘，CNN经典网络必须要知道，按先后顺序排列：
     LeNet、AlexNet、ZF Net、VGG、GoogLeNet、ResNet、DenseNet、SENet等，还有一些轻量级的网络，比如ShuffleNet、MobileNet系列。
-        
-        
-        
+
+3、CNN经典网络模型对应的项目
+	U-net：医学图像分割
+
+	LeNet：手写数字识别demo_3
+
+	Facenet：人脸识别（imagenet网络中的ZF，googlenet）
+
+	Resnet：Faster-RCNN
+	Darknet：YOLO
+	VGG：SSD
+         
 -------------------模型部署-----------------------  
 PMML全称预言模型标记语言（Predictive Model Markup Language），利用XML描述和存储数据挖掘模型，是一个已经被W3C所接受的标准。
 PMML是一种基于XML的语言，用来定义预言模型。使用pmml储存好模型之后，任何软件栈都可以调用pmml储存好的模型。
@@ -117,5 +126,22 @@ C++ 调用Python流程
     转换还回类型
     获取结果PyArg_Parse()
     结束释放Py_DECREF()、Py_Finalize()
-        
+
+-------------------神经网络模型概念-----------------------  
+正则化（Regularization）：减少特征，防止过拟合。dropout 是一种计算方便但功能强大的正则化方法，适用于神经网络。他的基本步骤是在每一次的迭代中，随机删除一部分节点，
+只训练剩下的节点。每次迭代都会随机删除，每次迭代删除的节点也都不一样，相当于每次迭代训练的都是不一样的网络，通过这样的方式降低节点之间的关联性以及模型的复杂度，
+从而达到正则化的效果。这点上有点类似 bagging，但是远比 bagging 简单。
+1、减少特征，降低模型的复杂度，防止过拟合。
+
+标准化（Batch Normalization，BN）:通过将每一层网络的输入进行normalization，保证输入分布的均值与方差固定在一定范围内，减少了网络中的Internal Covariate Shift问题，
+并在一定程度上缓解了梯度消失，加速了模型收敛；并且BN使得网络对参数、激活函数更加具有鲁棒性，降低了神经网络模型训练和调参的复杂度；
+最后BN训练过程中由于使用mini-batch的mean/variance每次都不同，引入了随机噪声，在一定程度上对模型起到了正则化的效果。
+1、缓解了梯度消失，加速了模型收敛。
+2、降低了神经网络模型训练和调参的复杂度。
+
+Internal Covariate Shift：在深层网络训练的过程中，由于网络中参数变化而引起内部结点数据分布发生变化的这一过程被称作Internal Covariate Shift。
+
+
+
+
         
