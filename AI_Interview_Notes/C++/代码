@@ -1,0 +1,223 @@
+1、单链表的插入与删除
+	单链表的插入s
+		s->next = p->next; /*将p的后继结点赋值给s的后继*/
+		p->next = s;  /*将s赋值给p的后继*/
+
+	单链表的删除q
+		p->next=q->next；  //结点q的后继成为结点p的后继
+		e=q->data;        //将被删除的元素的值赋给e
+		free(q);          //释放被删除结点的空间
+
+2、前序遍历、中序遍历、后序遍历
+	1、前序遍历：
+		先根节点
+		左节点
+		右节点
+
+	2、中序遍历：
+		左节点
+		根节点
+		右节点
+
+	3、后序遍历
+		左节点
+		右节点
+		根节点
+
+	typedef struct TreeNode
+	{
+		int data;
+		TreeNode * left;
+		TreeNode * right;
+		TreeNode * parent;
+	}TreeNode;
+	 
+	void pre_order(TreeNode * Node)//前序遍历递归算法
+	{
+		if(Node == NULL)
+	        return;
+		printf("%d ", Node->data);//显示节点数据，可以更改为其他操作。在前面
+		pre_order(Node->left);
+		pre_order(Node->right);
+	}
+	void middle_order(TreeNode *Node)//中序遍历递归算法
+	{
+	    if(Node == NULL)
+	        return;
+	    middle_order(Node->left);
+	    printf("%d ", Node->data);//在中间
+	    middle_order(Node->right);
+	}
+	void post_order(TreeNode *Node)//后序遍历递归算法
+	{
+	    if(Node == NULL)
+	        return; 
+	    post_order(Node->left);
+	    post_order(Node->right);
+	    printf("%d ", Node->data);//在最后
+	}
+
+3、冒泡排序
+	public static int[] bubbleSort(int[] arr) {
+		// 外层for循环控制循环次数
+		for(int i=0;i<arr.length;i++){
+			int tem = 0;
+			// 内层for循环控制相邻的两个元素进行比较
+			for(int j=i+1;j<arr.length;j++){
+			   if(arr[i]>arr[j]){
+				   tem = arr[j];
+				   arr[j]= arr[i];
+				   arr[i] = tem;
+			   }
+			}
+		}
+		return arr;
+	}
+
+4、快速排序
+	void quick_sort(int s[], int l, int r)
+	{
+		if (l < r)
+		{
+			//Swap(s[l], s[(l + r) / 2]); //将中间的这个数和第一个数交换 参见注1
+			int i = l, j = r, x = s[l];
+			while (i < j)
+			{
+				while(i < j && s[j] >= x) // 从右向左找第一个小于x的数
+					j--;  
+				if(i < j) 
+					s[i++] = s[j];
+				
+				while(i < j && s[i] < x) // 从左向右找第一个大于等于x的数
+					i++;  
+				if(i < j) 
+					s[j--] = s[i];
+			}
+			s[i] = x;
+			quick_sort(s, l, i - 1); // 递归调用 
+			quick_sort(s, i + 1, r);
+		}
+	}
+
+	int partition(int arr[], int low, int high){
+		int key;
+		key = arr[low];
+		while(low<high){
+			while(low <high && arr[high]>= key )
+				high--;
+			if(low<high)
+				arr[low++] = arr[high];
+			while( low<high && arr[low]<=key )
+				low++;
+			if(low<high)
+				arr[high--] = arr[low];
+		}
+		arr[low] = key;
+
+		return low;
+	}
+
+	void quick_sort(int arr[], int start, int end){
+		int pos;
+		if (start<end){
+			pos = partition(arr, start, end);
+			quick_sort(arr,start,pos-1);
+			quick_sort(arr,pos+1,end);
+		}
+
+		return;
+	}
+
+5、vector遍历
+	std::vector<std::string> arr;
+	std::vector<std::int> arr;
+	std::vector<int> arr;
+	vector<int> arr;
+	std::vector<CVector>::iterator arr;
+	std::vector<CVector> arr;
+	std::vector arr;
+	vector arr;
+	arr = { 1, 2, 3, 4, 5 };
+
+	for (auto it = arr.begin(); it != arr.end(); it++)
+	{
+		std::cout << *it << std::endl;
+	}
+	return 0;
+
+6、实现strcopy()函数
+	char strcpy(char _Dest, const char _Source)
+	{
+	//检查传入参数的有效性
+	assert(NULL != _Dest);
+	assert(NULL != _Source);
+	if (NULL ==_Dest || NULL == _Source)
+	return NULL;
+	char ret = _Dest;
+	while((_Dest++ = _Source++) != '\0') ;
+	return ret;
+	}
+
+7、不借用第三个变量，怎么把a，b的值互换
+	方式一：三次加减操作
+		int a =10;int b=5;
+		a= a+b;
+		b=a-b;
+		a=a-b;
+	方式二：三次异或操作
+		int a=2=010(二进制);
+		int b=4=100(二进制);
+		异或运算如下:
+		a=a^b=010^100=110(此时,a的值改变为二进制的110)
+		b=a^b=110^100=010(此时,b的值改变为二进制的010,即十进制的2)
+		a=a^b=110^010=100(此时,a的值改变为二进制的100,即十进制的4)
+
+8、
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
