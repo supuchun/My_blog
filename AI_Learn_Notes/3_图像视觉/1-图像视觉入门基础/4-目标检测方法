@@ -1,3 +1,17 @@
+0、目前学术和工业界出现的目标检测算法分成3类
+	1、传统的目标检测算法：Cascade + HOG/DPM + Haar/SVM以及上述方法的诸多改进、优化；
+		传统目标检测流程：
+		1）区域选择（穷举策略：采用滑动窗口，且设置不同的大小，不同的长宽比	对图像进行遍历，时间复杂度高）
+		2）特征提取（SIFT、HOG等；形态多样性、光照变化多样性、背景多样性使得特征鲁棒性差）
+		3）分类器分类（主要有SVM、Adaboost等）
+	2、候选区域/框 + 深度学习分类：通过提取候选区域，并对相应区域进行以深度学习方法为主的分类的方案，如：
+		R-CNN（Selective Search + CNN + SVM）
+		Fast R-CNN（Selective Search + CNN + ROI）
+		Faster R-CNN（RPN + CNN + ROI）
+		SPP-net（ROI Pooling）
+		R-FCN
+	3、基于深度学习的回归方法：YOLO/SSD/DenseBox 等方法；以及最近出现的结合RNN算法的RRC detection；结合DPM的Deformable CNN等
+
 1、非极大值抑制算法（NMS）
 	目标检测常会利用非极大值抑制算法（NMS），对生成的大量候选框进行处理，去除多余的候选框，得到最佳检测框，以加快目标检测的效率。其本质思想搜索全局最大值，抑制非最大值。
 

@@ -1,0 +1,5 @@
+1、模型部署
+	PMML全称预言模型标记语言（Predictive Model Markup Language），利用XML描述和存储数据挖掘模型，是一个已经被W3C所接受的标准。
+	PMML是一种基于XML的语言，用来定义预言模型。使用pmml储存好模型之后，任何软件栈都可以调用pmml储存好的模型。
+
+2、

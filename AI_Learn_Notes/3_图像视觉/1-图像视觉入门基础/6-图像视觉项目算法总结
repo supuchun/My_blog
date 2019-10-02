@@ -1,6 +1,6 @@
 -------------------人脸识别-----------------------
 1、人脸检测
-    1.提取人脸检测特征，得到面部候选框
+    1.提取人脸特征，得到面部候选框
         1）OpenCV
             1.Haar Cascade
             2.OpenCV DNN：最准确的
@@ -18,8 +18,14 @@
         2）face_recognition，提取的人脸特征比Dlib更加细致，达到128个点
         3）facenet（tf深度学习提取），提取的人脸特征的128个点       
     2.面部特征匹配，识别
-        1）KNN
-        2）欧氏距离
+        1）KNN（小数据集，运算量小）
+        2）欧氏距离（小数据集，运算量小）
+		3）SVM（大数据集，运算量大）
+		
+		
+附加：Dlib：HOG+SVM
+	HOG：对检测目标候选区域进行特征提取
+	SVM：目标识别分类器
 
 -------------------目标检测-----------------------
 1、one-stage：YOLO、SSD
@@ -73,73 +79,11 @@
 	Darknet：YOLO
 	VGG：SSD
          
--------------------模型部署-----------------------  
-PMML全称预言模型标记语言（Predictive Model Markup Language），利用XML描述和存储数据挖掘模型，是一个已经被W3C所接受的标准。
-PMML是一种基于XML的语言，用来定义预言模型。使用pmml储存好模型之后，任何软件栈都可以调用pmml储存好的模型。
 
--------------------python运行慢原因-----------------------   
-“它是GIL（全局解释器锁）”
-    当变量在多个线程内共享时，就出现了这个难题：CPython如何锁定引用计数。有一个“全局解释器锁”，它小心地控制线程执行。解释器一次只能执行一个操作，无论它有多少线程。
-“这是由于它是解释的，而非编译”
-    在终端上执行python myscript.py，那么CPython会启动读取、分析、解析、编译、解释和执行代码的一长串操作。
-“这是由于它是一种动态类型语言”
-    在“静态类型”语言中，你在声明变量时必须指定变量的类型。这样的语言包括C、C++、Java、C#和Go。
-    在动态类型语言中，仍然存在类型这个概念，但变量的类型是动态的。静态类型语言不是为了给你添堵而设计的，它们是兼顾CPU的运行方式设计的。
-    如果一切最终需要等同于简单的二进制操作，你就得将对象和类型转换成低级数据结构。
-    
-结论：Python之所以速度慢，主要是由于动态性和多功能性。Python有更优化、速度更快的几个替代方案：充分利用异步、深入了解分析工具以及考虑使用多个解释器
 
-对于性能优先并且有更多静态变量的代码部分，请考虑使用Cython。Cython，它结合了C-Static类型和Python来优化已知类型的代码，可以提供84倍速度的性能提升。
 
-一行代码让python的运行速度提高100倍：from numba import jit
-numba所完成的工作就是：
-    解析Python函数的ast语法树并加以改造，添加类型信息；
-    将带类型信息的ast语法树通过llvmpy动态地转换为机器码函数，然后再通过和ctypes类似的技术为机器码函数创建包装函数供Python调用。
 
-PYTHON是一种脚本语言，是解释执行的，不需要经过编译，所以很方便快捷，且能够很好地跨平台，写一些小工具小程序特别合适。
-而C++则是一种需要编译后运行语言，在特定的机器上编译后在特定的机上运行，运行效率高，安全稳定。但编译后的程序一般是不跨平台的。
 
--------------------python调用C++-----------------------   
-Linux：编译动态链接库test.so; Windows：编译动态链接库test.dll
-1、原生态导出实现，import导入动态链接库（test.so/test.dll）
-    1、直接import导入动态链接库（test.so/test.dll）
-    2、import ctypes
-       dll = ctypes.cdll.LoadLibrary('./test.so')
-       pdll = ctypes.CDLL('/home/ubuntu/tmp/example.so')
-    Python解释器就是用C实现，编译C/C++文件生成动态链接库（test.so/test.dll）,拷到py同一个目录下,import test即可使用。
-    如果是cpp源文件，inittest函数必须用extern "C"修饰，把编写的类封装成C函数模式，如果是c源文件，则不需要。
-2、通过boost实现：
-    1、通过boost实现，import导入动态链接库（test.so/test.dll）
-    2、通过boost实现，导出类，import导入动态链接库（test.so/test.dll）
-    3、通过boost实现，导出变参函数，import导入动态链接库（test.so/test.dll）
-    4、通过boost实现，导出带Python对象的接口，import导入动态链接库（test.so/test.dll）  
-    
--------------------C++调用python-----------------------
-C++ 调用Python流程  
-    加载python环境变量，安装目录及相关lib
-    添加头文件 #include <Python.h>
-    初始化Python环境 Py_Initialize() 
-    添加模块路径（或者说脚本路径）PyRun_SimpleString()
-    导入模块PyImport_ImportModule()
-    导入函数PyObject_GetAttrString()
-    使用函数PyObject_CallObject()
-    转换还回类型
-    获取结果PyArg_Parse()
-    结束释放Py_DECREF()、Py_Finalize()
-
--------------------神经网络模型概念-----------------------  
-正则化（Regularization）：减少特征，防止过拟合。dropout 是一种计算方便但功能强大的正则化方法，适用于神经网络。他的基本步骤是在每一次的迭代中，随机删除一部分节点，
-只训练剩下的节点。每次迭代都会随机删除，每次迭代删除的节点也都不一样，相当于每次迭代训练的都是不一样的网络，通过这样的方式降低节点之间的关联性以及模型的复杂度，
-从而达到正则化的效果。这点上有点类似 bagging，但是远比 bagging 简单。
-1、减少特征，降低模型的复杂度，防止过拟合。
-
-标准化（Batch Normalization，BN）:通过将每一层网络的输入进行normalization，保证输入分布的均值与方差固定在一定范围内，减少了网络中的Internal Covariate Shift问题，
-并在一定程度上缓解了梯度消失，加速了模型收敛；并且BN使得网络对参数、激活函数更加具有鲁棒性，降低了神经网络模型训练和调参的复杂度；
-最后BN训练过程中由于使用mini-batch的mean/variance每次都不同，引入了随机噪声，在一定程度上对模型起到了正则化的效果。
-1、缓解了梯度消失，加速了模型收敛。
-2、降低了神经网络模型训练和调参的复杂度。
-
-Internal Covariate Shift：在深层网络训练的过程中，由于网络中参数变化而引起内部结点数据分布发生变化的这一过程被称作Internal Covariate Shift。
 
 
 

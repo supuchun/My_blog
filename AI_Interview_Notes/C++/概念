@@ -90,7 +90,33 @@
 	浅拷贝（shallowCopy）只是增加了一个指针指向已存在的内存地址，
 	深拷贝（deepCopy）是增加了一个指针并且申请了一个新的内存，使这个增加的指针指向这个新的内存，
 
-12、
+12、python调用C++ 与 C++调用python
+	python调用C++
+		Linux：编译动态链接库test.so; Windows：编译动态链接库test.dll
+		1、原生态导出实现，import导入动态链接库（test.so/test.dll）
+			1、直接import导入动态链接库（test.so/test.dll）
+			2、import ctypes
+			   dll = ctypes.cdll.LoadLibrary('./test.so')
+			   pdll = ctypes.CDLL('/home/ubuntu/tmp/example.so')
+			Python解释器就是用C实现，编译C/C++文件生成动态链接库（test.so/test.dll）,拷到py同一个目录下,import test即可使用。
+			如果是cpp源文件，inittest函数必须用extern "C"修饰，把编写的类封装成C函数模式，如果是c源文件，则不需要。
+		2、通过boost实现：
+			1、通过boost实现，import导入动态链接库（test.so/test.dll）
+			2、通过boost实现，导出类，import导入动态链接库（test.so/test.dll）
+			3、通过boost实现，导出变参函数，import导入动态链接库（test.so/test.dll）
+			4、通过boost实现，导出带Python对象的接口，import导入动态链接库（test.so/test.dll）  
+		
+	C++调用python 
+		加载python环境变量，安装目录及相关lib
+		添加头文件 #include <Python.h>
+		初始化Python环境 Py_Initialize() 
+		添加模块路径（或者说脚本路径）PyRun_SimpleString()
+		导入模块PyImport_ImportModule()
+		导入函数PyObject_GetAttrString()
+		使用函数PyObject_CallObject()
+		转换还回类型
+		获取结果PyArg_Parse()
+		结束释放Py_DECREF()、Py_Finalize()
 
 
 
