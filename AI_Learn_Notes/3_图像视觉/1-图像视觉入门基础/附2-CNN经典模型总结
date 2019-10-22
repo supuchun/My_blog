@@ -1,0 +1,131 @@
+-------------------CNN经典模型总结-----------------------   
+1、常见的CNN经典网络模型包括，按先后顺序排列：
+    LeNet5、AlexNet、ZFNet、VGG、GoogLeNet、ResNet、DenseNet、SENet等，还有一些轻量级的网络，比如ShuffleNet、MobileNet系列。
+	
+2、CNN经典网络模型对应的项目
+	LeNet5：DL_demo_3和Recognition_of_handwritten_Numbers_3.py（OCR：手写数字识别...文字识别、车牌识别）
+		conv1+relu1+pool1
+		conv2+relu2+pool2
+		fc1
+		dropout
+		fc2
+		softmax(激活函数输出多分类)
+	
+	AlexNet
+	
+	ZFNet
+	
+	VGG：SSD
+	
+	GoogLeNet：Facenet（人脸识别）
+
+	Resnet
+	
+	DenseNet
+	
+	RPN：Faster-RCNN
+	
+	Darknet：YOLO
+	
+	U-net：医学图像分割
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------CNN模型结构介绍-----------------------   
+CNN
+	卷积层
+	激活函数层
+	池化层
+	全连接层
+
+优化算法
+	梯度下降法
+	牛顿法
+	凸优化
+	
+Boosting集成学习方法代表XGBoot、GBDT、adboost
+	XGBoot模型：eXtreme Gradient Boosting，是GBDT的一种高效实现
+	GBDT模型：（Gradient Boosting Decision Tree）是一种迭代的决策树算法
+
+SVM
+
+
+	
+
+
+
+
+-------------------CNN经典模型介绍-----------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  

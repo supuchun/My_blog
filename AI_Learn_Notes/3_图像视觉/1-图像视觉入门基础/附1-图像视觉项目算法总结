@@ -1,6 +1,6 @@
 -------------------人脸识别-----------------------
 1、人脸检测
-    1.提取人脸特征，得到面部候选框
+    1.人脸检测，得到面部候选框
         1）OpenCV
             1.Haar Cascade
             2.OpenCV DNN：最准确的
@@ -13,7 +13,7 @@
         4）facenet：Google的人脸识别库，基于Tensorflow，采用端对端深度学习一个从图像到欧式空间的编码方法，然后基于这个编码再做人脸识别、人脸验证和人脸聚类等。
 
 2、人脸识别
-    1.面部关键点定位，提取
+    1.面部关键点定位，人脸特征提取
         1）Dlib，提取人脸的68个特征点
         2）face_recognition，提取的人脸特征比Dlib更加细致，达到128个点
         3）facenet（tf深度学习提取），提取的人脸特征的128个点       
@@ -21,11 +21,6 @@
         1）KNN（小数据集，运算量小）
         2）欧氏距离（小数据集，运算量小）
 		3）SVM（大数据集，运算量大）
-		
-		
-附加：Dlib：HOG+SVM
-	HOG：对检测目标候选区域进行特征提取
-	SVM：目标识别分类器
 
 -------------------目标检测-----------------------
 1、one-stage：YOLO、SSD
@@ -61,24 +56,9 @@
     
 4、其他:把目标检测问题转换成关键点检测问题，之后涌现了CenterNet、ExtremeNet等一系列基于关键点的目标检测。
 
--------------------CNN经典网络-----------------------   
-1、常见的图像分类CNN经典网络模型包括：
-    VGG、ResNet、Inception、SENet和PNASNet等，这些分类模型都在ImageNet数据集上验证过精度，所以可以优先选择这些成熟的图像分类模型。
-
-2、2012年以后深度学习方法在计算机视觉领域一骑绝尘，CNN经典网络必须要知道，按先后顺序排列：
-    LeNet、AlexNet、ZF Net、VGG、GoogLeNet、ResNet、DenseNet、SENet等，还有一些轻量级的网络，比如ShuffleNet、MobileNet系列。
-
-3、CNN经典网络模型对应的项目
-	U-net：医学图像分割
-
-	LeNet：手写数字识别demo_3
-
-	Facenet：人脸识别（imagenet网络中的ZF，googlenet）
-
-	Resnet：Faster-RCNN
-	Darknet：YOLO
-	VGG：SSD
-         
+5、附加传统算法：Dlib：HOG+SVM
+	HOG：对检测目标候选区域进行特征提取
+	SVM：目标识别分类器
 
 
 
@@ -87,5 +67,4 @@
 
 
 
-
-        
+    
