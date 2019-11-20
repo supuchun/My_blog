@@ -50,7 +50,7 @@
         其原理大概为：(1) 预先找出图中物体可能出现的位置，即候选区域 (Region Proposal) 。利用图像中的纹理、边缘、颜色等信息，
         可以保证在选取较少窗口 (几千甚至几百) 的情况下保持较高的召回率 (Recall) 。(2) 然后将这些候选框送入CNN网络中进行识别分类。
     Fast R-CNN 相对R-CNN，Fast R-CNN算法有了很大改进，即提高了精确度，并减少了执行前向网络计算所需的时间；然而，该模型仍然依赖于外部的候选框算法。
-    Faster-RCNN 通过使用区域生成网络 (Region Proposal Network, RPN)来取代候选框算法，Faster R-CNN 最终成为真正的端到端目标检测器。
+    Faster-RCNN 通过使用区域生成网络 (Region Proposal Network, RPN)来取代候选框算法，Faster R-CNN 不是真正的端到端目标检测器。
     
     5.one-stage策略比two-stage策略的精度低，但速度快得多。
     
