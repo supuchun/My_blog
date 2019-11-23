@@ -1,131 +1,123 @@
--------------------CNN经典模型总结-----------------------   
-1、常见的CNN经典网络模型包括，按先后顺序排列：
-    LeNet5、AlexNet、ZFNet、VGG、GoogLeNet、ResNet、DenseNet、SENet等，还有一些轻量级的网络，比如ShuffleNet、MobileNet系列。
+-------------------CNN经典网络模型总结-----------------------   
+1、常见的CNN经典网络模型包括，按时间先后顺序：
+    LeNet5、AlexNet、ZFNet、VGG、GoogLeNet、ResNet、DenseNet等，还有一些轻量级的网络，比如ShuffleNet、MobileNet系列。
+	1998	2012	 2013	2014	2014	2015	2017
 	
 2、CNN经典网络模型对应的项目
-	LeNet5：DL_demo_3和Recognition_of_handwritten_Numbers_3.py（OCR：手写数字识别...文字识别、车牌识别）
-		conv1+relu1+pool1
-		conv2+relu2+pool2
-		fc1
-		dropout
-		fc2
-		softmax(激活函数输出多分类)
+	LeNet5：手写数字识别：DL_demo_3和Recognition_of_handwritten_Numbers_3.py
 	
 	AlexNet
 	
 	ZFNet
 	
-	VGG：SSD
+	VGG
 	
-	GoogLeNet：Facenet（人脸识别）
+	GoogLeNet：FaceNet中采用的 Inception 架构的深度卷积神经网络，基于GoogLeNet
 
 	Resnet
 	
 	DenseNet
 	
-	RPN：Faster-RCNN
+	附加网络结构模型对应项目
+		R-CNN系列（R-CNN、Fast R-CNN、Faster R-CNN）：目标检测
+		
+		YOLO（基于Darknet框架）：目标检测
+		
+		SSD（基于VGG网络结构）：目标检测
+		
+		U-net：医学图像分割
+
+3、CNN网络结构
+	输入层：原始image
 	
-	Darknet：YOLO
+	卷积层+激活函数层：convolutional，Relu常见于卷积层
 	
-	U-net：医学图像分割
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--------------------CNN模型结构介绍-----------------------   
-CNN
-	卷积层
-	激活函数层
-	池化层
-	全连接层
-
-优化算法
-	梯度下降法
-	牛顿法
-	凸优化
+	池化层：max-pooling、mean-pooling，通常情况下，池化区域是2*2大小
 	
-Boosting集成学习方法代表XGBoot、GBDT、adboost
-	XGBoot模型：eXtreme Gradient Boosting，是GBDT的一种高效实现
-	GBDT模型：（Gradient Boosting Decision Tree）是一种迭代的决策树算法
+	全连接层+激活函数层：full-conected，sigmoid、tanh常见于全连接层
+	
+	输出层：softmax用于分类识别
+	
+	网络卷积层中的网络能够提取输入的每一个细节信息，同时5x5的滤波器（卷积核）也能够覆盖大部分接受层的的输入。
+	每一个卷积层后都要做一个ReLU操作，以增加网络的非线性特征。
+	每一个ReLU激活层后还可以进行一个池化操作，以减少空间大小，降低过度拟合。
+	
+4、CNN网络结构的几个特点：局部感知、参数共享、池化
 
-SVM
+5、提升CNN网络性能
+	一般来说，提升网络性能最直接的办法就是增加网络深度和宽度，深度指网络层次数量、宽度指神经元数量。
+	但这种方式存在以下问题：
+		（1）参数太多，如果训练数据集有限，很容易产生过拟合；
+		（2）网络越大、参数越多，计算复杂度越大，难以应用；
+		（3）网络越深，容易出现梯度弥散问题（梯度越往后穿越容易消失），难以优化模型。
+	所以，有人调侃“深度学习”其实是“深度调参”。
+	
+6、激活函数
+	tanh函数与Sigmoid类似，也存在着梯度弥散或梯度饱和的缺点。如果输入的是比较大或者比较小的数会产生饱和效应，
+	导致神经元类似于死亡状态。ReLU求梯度非常简单，可以提升随机梯度下降的收敛速度，在深度学习中使用得很多，
+	可以解决梯度弥散问题，因为它的导数等于1或者就是0。（因为ReLU是线性的，而sigmoid和tanh是非线性的）
 
+-------------------CNN经典网络模型介绍----------------------- 
+				LeNet5、AlexNet、VGG、GoogLeNet
+LeNet5：
+	如今各大深度学习框架中所使用的LeNet都是简化改进过的LeNet-5。
+	LeNet-5的结构分析：
+		首先输入图像是单通道的28*28大小的图像，用矩阵表示就是[1,28,28]
+		第一个卷积层conv1所用的卷积核尺寸为5*5，滑动步长为1，卷积核数目为20，那么经过该层后图像尺寸变为24，28-5+1=24，
+			输出矩阵为[20,24,24]。
+		第一个池化层pool核尺寸为2*2，步长2，这是没有重叠的max pooling，池化操作后，图像尺寸减半，变为12×12，
+			输出矩阵为[20,12,12]。
+		第二个卷积层conv2的卷积核尺寸为5*5，步长1，卷积核数目为50，卷积后图像尺寸变为8,这是因为12-5+1=8，
+			输出矩阵为[50,8,8].
+		第二个池化层pool2核尺寸为2*2，步长2，这是没有重叠的max pooling，池化操作后，图像尺寸减半，变为4×4，
+			输出矩阵为[50,4,4]。
+		pool2后面接全连接层fc1，神经元数目为500，再接relu激活函数。
+		再接fc2，神经元个数为10，得到10维的特征向量，用于10个数字的分类训练，送入softmaxt分类，得到分类结果的概率output。
+
+AlexNet：
+	AlexNet网络结构共有8层，前面5层是卷积层+激活函数+池化层，后面3层是全连接层，
+	最后一个全连接层的输出传递给一个1000路的softmax层，对应1000个类标签的分布。
+	使用了非线性激活函数：ReLU
+	防止过拟合的方法：Dropout，数据扩充（Data augmentation）
+	重叠池化 
+	其他：多GPU实现，LRN归一化层的使用，来实现局部抑制
+
+VGG：
+	VGGNet则清一色使用3x3卷积，全部为2x2的池化核。VGG16，从头到尾只有3x3卷积与2x2池化，简洁优美。
+	input=8，3层conv3x3后，output=2，等同于1层conv7x7的结果；
+	input=8，2层conv3x3后，output=2，等同于2层conv5x5的结果。
+	VGG由5层卷积层、3层全连接层、softmax输出层构成，层与层之间使用max-pooling（最大化池）分开，所有隐层的激活单元都采用ReLU函数。
+	VGG16的处理过程：输入层->（卷积层+激活函数层）+池化层->(全连接层+激活函数层）->输出层
+					  image		convolution+ReLU	Pooling	 full-conected+Relu	softmax
+		1、输入224x224x3的图片，经64个3x3的卷积核作两次卷积+ReLU，卷积后的尺寸变为224x224x64
+		2、作max pooling（最大化池化），池化单元尺寸为2x2（效果为图像尺寸减半），池化后的尺寸变为112x112x64
+		3、经128个3x3的卷积核作两次卷积+ReLU，尺寸变为112x112x128
+		4、作2x2的max pooling池化，尺寸变为56x56x128
+		5、经256个3x3的卷积核作三次卷积+ReLU，尺寸变为56x56x256
+		6、作2x2的max pooling池化，尺寸变为28x28x256
+		7、经512个3x3的卷积核作三次卷积+ReLU，尺寸变为28x28x512
+		8、作2x2的max pooling池化，尺寸变为14x14x512
+		9、经512个3x3的卷积核作三次卷积+ReLU，尺寸变为14x14x512
+		10、作2x2的max pooling池化，尺寸变为7x7x512
+		11、与两层1x1x4096，一层1x1x1000进行全连接+ReLU（共三层）
+		12、通过softmax输出1000个预测结果
+
+GoogLeNet：
+	VGG继承了LeNet以及AlexNet的一些框架结构，GoogLeNet则做了更加大胆的网络结构尝试，虽然深度只有22层，
+	但大小却比AlexNet和VGG小很多。GoogleNet参数为500万个，AlexNet参数个数是GoogleNet的12倍，
+	VGGNet参数又是AlexNet的3倍，因此在内存或计算资源有限时，GoogleNet是比较好的选择；
+	从模型结果来看，GoogLeNet的性能却更加优越。
+	
+	GoogLeNet的网络结构说明如下：
+	（1）GoogLeNet采用了模块化的结构（Inception结构），方便增添和修改；
+	（2）网络最后采用了average pooling（平均池化）来代替全连接层，该想法来自NIN（Network in Network），
+		事实证明这样可以将准确率提高0.6%。但是，实际在最后还是加了一个全连接层，主要是为了方便对输出进行灵活调整；
+	（3）虽然移除了全连接，但是网络中依然使用了Dropout ; 
+	（4）为了避免梯度消失，网络额外增加了2个辅助的softmax用于向前传导梯度（辅助分类器）。
+		辅助分类器是将中间某一层的输出用作分类，并按一个较小的权重（0.3）加到最终分类结果中，这样相当于做了模型融合，
+		同时给网络增加了反向传播的梯度信号，也提供了额外的正则化，对于整个网络的训练很有裨益。
+		而在实际测试的时候，这两个额外的softmax会被去掉。
+		
 
 	
-
-
-
-
--------------------CNN经典模型介绍-----------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
+	
