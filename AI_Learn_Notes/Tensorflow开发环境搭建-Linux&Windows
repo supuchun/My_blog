@@ -5,14 +5,17 @@
             进入到windows中的命令模式：
             （1）检测anaconda环境是否安装成功：conda --version
             （2）检测目前安装了哪些环境变量：conda info --envs
-            （3）查看当前使用的python版本：输入python
+            （3）查看当前使用的python版本：输入python --version
                  conda create --name tensorflow python=3.X
             （4）激活tensflow的环境：activate tensorflow
             （5）检测tensflow的环境添加到了Anaconda里面：conda info --envs
             （6）检测当前环境中的python的版本：python --version
             （7）退出tensorflow的环境：deactivate
             （8）切换到tensorflow的环境：activate tensorflow      
-        3：通过命令：pip install --upgrade --ignore-installed tensorflow
+        3：通过命令：anaconda show anaconda/tensorflow
+					 pip install --upgrade --ignore-installed tensorflow==1.8.0
+					 pip install --upgrade --ignore-installed tensorflow
+					 anaconda show anaconda/tensorflow
         4：等待完成之后，确认是否安装成功
             （1）activate tensorflow
             （2）输入python
