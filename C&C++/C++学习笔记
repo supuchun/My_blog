@@ -150,23 +150,23 @@
     4、：一般用来表示继承；
 
 15、
-class Student{
-public:
-    //类包含的变量
-    char *name;
-    int age;
-    float score;
-    //类包含的函数
-    void say(){
-        cout<<name<<"的年龄是"<<age<<"，成绩是"<<score<<endl;
-    }
-};
+	class Student{
+	public:
+		//类包含的变量
+		char *name;
+		int age;
+		float score;
+		//类包含的函数
+		void say(){
+			cout<<name<<"的年龄是"<<age<<"，成绩是"<<score<<endl;
+		}
+	};
 
-Student stu;  //stu 在栈上分配内存
-Student *pStu = &stu;  //stu 在栈上分配内存
+	Student stu;  //stu 在栈上分配内存
+	Student *pStu = &stu;  //stu 在栈上分配内存
 
-Student *pStu = new Student;  //在堆上创建对象，这个时候就需要使用到new关键字
-delete pStu;  //删除对象
+	Student *pStu = new Student;  //在堆上创建对象，这个时候就需要使用到new关键字
+	delete pStu;  //删除对象
 
     在栈上创建出来的对象都有一个名字，比如 stu，使用指针指向它不是必须的。
     但是通过 new 创建出来的对象就不一样了，它在堆上分配内存，没有名字，只能得到一个指向它的指针，
@@ -579,7 +579,7 @@ delete pStu;  //删除对象
     3、智能指针能够使C++的开发简单化，主要是它能够像其它限制性语言（如C#、VB）自动管理内存的释放。智能指针是一种像指针的C++对象，但它能够在对象不使用的时候自己销毁掉。
 
 27、多线程
-c++多线程有几种实现方法
+	c++多线程有几种实现方法
     1.直接使用操作系统API
         windows下通过api CreateThread，linux下则常用pthread库，这些都是最底层的实现。
             linux：pthread_create(&threads[i], NULL, PrintHello, (void *)&td[i]); pthread_join(threads[i], &status);
@@ -598,7 +598,7 @@ c++多线程有几种实现方法
     3.使用第三方线程库
         第三方库的话比如boost的thread等，不推荐使用vc自家的_beginthread，尤其有跨平台需求的时候。
 
-多线程Java多线程方式
+	多线程Java多线程方式
     Java中创建线程主要有4种方式：实现Runnable接口这种方式更受欢迎，因为这不需要继承Thread类。
         1.继承Thread类创建线程类（真正意义上的线程类），是Runnable接口的实现。
             （1）定义Thread类的子类，并重写该类的run方法，该run方法的方法体就代表了线程要完成的任务。因此把run()方法称为执行体。
@@ -720,4 +720,39 @@ c++多线程有几种实现方法
         } 
         输出结果：参考Runnable2
 
-28、
+28、QT
+	1、Qt设计界面有三种方式：
+	（1）手工编写创建界面的代码：此方法比较复杂，不够直观；
+	（2）使用Qt Designer界面编辑器设计：可直接拖放控件、设置控件的属性，简单、直观、易于操作；
+	（3）动态加载UI文件并生成界面：此方法很灵活，当需要更改界面时只需更改.UI文件即可，无需重新编译程序。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
