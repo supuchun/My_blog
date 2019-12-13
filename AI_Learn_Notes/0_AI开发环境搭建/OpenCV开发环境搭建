@@ -1,0 +1,45 @@
+一、OpenCV Python开发环境搭建
+	1、图像识别库
+		opencv-python
+		dlib
+		face_recognition
+		Pillow
+
+	2、OpenCV环境安装
+		1）opencv-python
+			pip install opencv-python
+			pip install opencv_python-3.4.1-cp36-cp36m-win_amd64.whl
+		2）dlib：安装face_recognition需要首先安装dlib
+			conda install -c menpo dlib
+			pip install dlib==19.7.0
+			pip install dlib-19.7.0-cp36-cp36m-win_amd64.whl
+			dlib源码编译安装
+				1.下载dlib的源码：git clone https://github.com/davisking/dlib.git
+				2.编译dlib：cd dlib
+							mkdir build
+							cd build
+							cmake .. -DDLIB_USE_CUDA=0 -DUSE_AVX_INSTRUCTIONS=1
+							cmake --build
+				3.编译并安装python的拓展包：cd ..
+							   python3 setup.py install  
+							   python3 setup.py install --yes USE_AVX_INSTRUCTIONS --no DLIB_USE_CUDA
+							   （注意：这个安装步骤是默认认为没有GPU的，所以不支持cuda）
+		3）pip install face_recognition
+		4）pip install Pillow 
+
+二、OpenCV C++开发环境搭建
+	1、官网下载目前最新版的opencv的winpack
+	
+	2、安装到自己的本地路径上，路径名尽量用英文名
+	
+	3、接着是环境变量配置path
+		D:\opencv4.0.1\opencv\build\x64\vc14\bin (vs2015对应的是vc14，vs2017对应的是vc15)
+		
+	4、vs2015中配置OpenCV
+	
+三、参考：https://www.cnblogs.com/chenjx85/p/10311644.html
+	      https://blog.csdn.net/weixin_41991128/article/details/83656543
+	      https://space.bilibili.com/365916694/#/
+		
+
+         
